@@ -215,5 +215,112 @@ When a phase is run, all the goals related to that phase and it’s Plugins are 
 ![image](https://user-images.githubusercontent.com/120022254/233935817-83392eb3-4bd0-4d7d-b0ec-07975730419b.png)
 ![image](https://user-images.githubusercontent.com/120022254/233935885-783a6d74-5774-4920-880e-0522ac8a9376.png)
 
+1. Generate Source Code :
 
+```
+mvn archetype:generate # Generating A Basic Project
+```
+In real time Git Link will be Clone Here and `archetype:generate` used for project generate purpose.
+```
+Choose a number or apply filter (format: [groupId:] artifactId, case sensitive contains): 2007: (ENTER)
+Choose org.apache.maven.archetypes:maven-archetype-quickstart version: (Choose Any No. / ENTER)
+Define value for property 'groupId': DevOps (Any Name)                       
+Define value for property 'artifactId': MY-PROJECT (Project Name)
+Define value for property 'version' 1.0-SNAPSHOT:: (ENTER)
+Define value for property 'package' DevOps:: (ENTER)
+Confirm properties configuration: Y
+```
 
+Once the `BUILD SUCCESS`, One Artifact ID Created MY-PROJECT [Maven Project Folder] 
+
+Inside project folder, we get `POM.XML` AND `SRC`.
+
+Note - Build Goals Should Be Done Inside Project Folder (MY-PROJECT)
+```
+cd <MY-PROJECT>
+```
+
+### Goals and Purpose of Goals :
+
+Maven provided several goals to perform project build activities. 
+
+* Clean 
+* Compile 
+* Test 
+* Package 
+* Install 
+
+2. Compile The Code
+```
+mvn compile
+```
+Compile goal is used to compile the source code into byte code. Compile code will stored in target folder.
+
+When we compile, the target folder will gets created and we can see the output on Target Folder. 
+
+3. Test The Code
+```
+mvn test
+```
+Test goal is used to execute the unit test code of our application.
+
+Once the test is done, some test folders will gets created in Target Folder 
+
+4. Build The Code 
+```
+mvn package
+```
+Package goal is used to generate the jar/war file for our application based on packaging type available in POM.xml
+
+It will pack along with its dependencies. 
+
+Once the build is done, Jar file will be created in Target (jar/war/ear) 
+
+Note: Artifact_id-Version-SNAPSHOT.jar [MY-PROJECT-1.0-SNAPSHOT.jar]
+
+5. Install The Code
+```
+mvn install 
+```
+Install goal is used to install our project as dependency in maven local repository.
+
+Once install is done, maven-archiver folder will be generated in Target Folder
+
+6. Deploy The code
+```
+mvn deploy
+```
+Deploy will be failed. it’s not possible to do it directly. By using any integration tool like Jenkins. We can deploy to our server.
+
+7. Clean The code
+```
+mvn clean
+```
+Clean goal is used delete the Target Folder that means executable/run-time files will be deleted.
+
+8. Clean Package 
+```
+mvn clean package
+```
+Clean package goal is used to clear the Previous packages and over-write entire build steps from start. 
+
+Note: Every Maven goal is associated with maven plugin. When we execute maven goal then respective maven plugin will execute to perform the operation.
+
+* To set Particular Java version as default.
+```
+alternatives --config java 
+```
+### Q/A :
+
+1. Compilation means converting the source code into byte code.
+
+2. Java project means collection of java programs 
+
+3. What is Mean by JVM, JDK and JRE ?
+
+   - JVM – Java virtual machine 
+   - JDK – Java development kit 
+   - JRE – Java runtime environment
+
+4. Jar – Java archive => standalone java application will be executed as jar 
+5. War – Web archive => Java web application will be executed as war file
