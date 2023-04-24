@@ -192,6 +192,55 @@ This is how maven will work through POM. So, the POM.xml is very important file.
  
 ## Steps To Setup Maven :
 
+1)	Install Java :
+
+Before installing maven, Ensure that java installed on your machine.
+* To Install Java: 
+```
+yum install java-1.8.0-openjdk -y #Standard Java Version
+```
+* To Varify Java Version :
+```
+java -version 
+```
+
+2)	Download Maven File From " http://dlcdn.apache.org "
+```
+wget https://dlcdn.apache.org/maven/maven-3/3.9.0/binaries/apache-maven-3.9.0-bin.tar.gz
+```
+Note - Download only 'Binary' tar.gz/zip file only. Don’t download 'Source' tar.gz/zip file.
+
+3)	Extract Maven :
+
+* If you downloaded tar file 
+```
+tar -zxvf apache-maven-3.8.4-bin.tar.gz -C /opt 
+```
+tar command is used to extract the ‘tar Archive’ to “Directory file” - `apache-maven-3.8.4`
+
+* If you downloaded zip file 
+```
+unzip apache-maven-3.8.4-bin.zip -C /opt
+```
+'unzip' command is used to extract the ‘zip Archive’ to “Directory file” - `apache-maven-3.8.4`
+
+'-C /opt' is Optional Folder - Usually all the external Software installing in the $ cd /opt
+```
+cd /opt # Maven file downloaded Here
+cd apache-maven-3.8.4 
+pwd 
+```
+Maven Home directory - Where we have extracted the archive file: /opt/apache-maven-3.8.4
+
+4)	Install Maven :
+```
+yum install maven -y
+```
+
+5)	Verify Maven: 
+```
+mvn -version
+```
 
 ## Maven Build Life Cycle :
 
@@ -207,7 +256,7 @@ When a phase is run, all the goals related to that phase and it’s Plugins are 
 4)	Package (Build) – $ mvn package
 5)	Install (Into local repo or Artifactory) – $ mvn install 
 6) Deploy – By integrate with Jenkins, we can deploy to servers
-7) Clean (To delete all the run time files) – $mvn clean 
+7) Clean (To delete all the run time files) – $ mvn clean 
 
 
 ## MAVEN DIRECTORY STRUCTURE :
