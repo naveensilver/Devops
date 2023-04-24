@@ -209,3 +209,11 @@ When a phase is run, all the goals related to that phase and it’s Plugins are 
 6) Deploy – By integrate with Jenkins, we can deploy to servers
 7) Clean (To delete all the run time files) – $mvn clean 
 
+
+## MAVEN DIRECTORY STRUCTURE :
+
+![image](https://user-images.githubusercontent.com/120022254/233935817-83392eb3-4bd0-4d7d-b0ec-07975730419b.png)
+![image](https://user-images.githubusercontent.com/120022254/233935885-783a6d74-5774-4920-880e-0522ac8a9376.png)
+
+
+
