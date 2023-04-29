@@ -226,4 +226,21 @@ Note : If we have error in our code then it will give feedback & it will be corr
   BamBOO, Travious CI, Circle CI, Git Lab, Buddy, Teamcity, Sema4, AWS code Pipeline.
   
   
+  ### MASTER-SLAVE ARCHITECTURE / MASTER ROLES :
+  
+  Master assign a jobs to the slaves. that slaves works on assigned Job/Work.
+  
+  If the slaves are not available, master itself done the job.
+  
+  By using lable, we can specify/assogn the job to the nodes/Slaves.
+  ```
+                                |--->  Jenkins Slave-1
+                                |
+                                |
+  Jenkins-Master ---------------> Jenkins Slave-2
+                                  (Ubuntu/linux)
+  
+  ```
+  ### Jenkins Set-Up :
+  
   
