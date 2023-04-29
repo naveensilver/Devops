@@ -151,13 +151,13 @@ Let's consider an example, if you are developing a web application.
     
   That menans, 
   
-  we need server = EC2-Instance
+    - we need server = EC2-Instance
   
-  Database for storing data - RDS
+    - Database for storing data = RDS
   
-  For Networking - VPC
+    - For Networking = VPC
   
-  For Storing - S3
+    - For Storing = S3
   
   Types of Enviroments :
   
@@ -181,4 +181,49 @@ Note : If we have error in our code then it will give feedback & it will be corr
   Because of this pipeline, Bugs will be reported fast & get reflected. So, entire development is fast.
   
   
-      
+## Jenkins :
+  
+  Jenkins is an Open Source Project.
+  
+  Jenkins is written in Java & Developed by Kohsuke Kawaguchi.
+  
+  Jenkins is Playform independent. (Works on any OS like Windows, Linux, Mac OS)
+  
+  Jenkins has Community-Supported & Free to use.
+  
+  Jenkins is first choice for Continuous Integration and It consists of Plugins 
+  
+  * Plugin is nothing but a small software, that we used to add some extra features to our jenkins dashboard.
+  
+  Jenkins Automates the entire SDLC 
+  
+  #### IMAGE ###
+  
+  By using single tool, we can intigrate and automate entire software development.
+  
+  Jenkins was originally developed by Sun Micro-System in 2004 and Named as HUDSON. Hudson was paid software.
+  
+  After Oracle bought from Sun Micro-System and Renamed as Jenkins and Given for free.
+  
+  It can run on any playforms without issues.
+  
+  Whenever developers write the code, we can integrate the code to all developers.
+  
+  At any point of time, we can Build, Test and Deliver/Deploy application to client. This is Called "CI/CD"
+  
+  DEV =========> Git ===========> Jenkins =========> Client.
+  
+  **Advantages :**
+  
+  Jenkisn follows Master-Slave Architecture.
+  
+  You can write own plugin, can use community plugins also.
+  
+  Can easily understand the process of what is going on.
+  
+  **Jenkins Alternatives :**
+  
+  BamBOO, Travious CI, Circle CI, Git Lab, Buddy, Teamcity, Sema4, AWS code Pipeline.
+  
+  
+  
