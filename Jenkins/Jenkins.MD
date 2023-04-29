@@ -84,7 +84,7 @@ In Continuous Deployment, Deploy to production - Automatically.
     
 ### Architecture of CI/CD :
     
-    <iMAGE>
+<iMAGE>
       
       
 **Uses/Benifits/Advanages of CI/CD :**
@@ -112,5 +112,73 @@ In Continuous Deployment, Deploy to production - Automatically.
    - Reduce the cost.
       
       
+### CI/CD Pipeline :
+      
+It is one of the most important role for devops engineers.
+      
+CI/CD Pipeline is a step by step process.
+  
+It is Combination of multiple Jobs/Tasks.
+  
+<Image>
+
+It's looks like a software developement life cycle(SDLC).
+  
+Let's consider an example, if you are developing a web application.
+  
+  
+* Version control : 
+  
+  Here, developers need to write code for web application. So, it needs to be committed by using Version control system like GIT or SVN.
+  
+* Build :
+  
+  let's consider, your code is written in java. it's needs to be compiled before execution. In this build step, code gets compiled and generated .jar file.
+  
+  Once the build step complited, then move to testing Phase.
+
+* Unit Test : 
+  
+  It will only test the application components are correctly working or not.
+  
+  If the unit test is complited, then move to deploy phase.
+  
+* Deploy :
+  
+  In this step, we can deploy our code in testing Environment. Here, you can see your application O/p.
+  
+  Environment : It is setup for our application.
     
+  That menans, 
+  
+  we need server = EC2-Instance
+  
+  Database for storing data - RDS
+  
+  For Networking - VPC
+  
+  For Storing - S3
+  
+  Types of Enviroments :
+  
+  1) DEV = This is for Developers.
+  
+  2) Q/A = Test Environment - Testers will test the app.
+  
+  3) Production = This is for Client.
+  
+* Auto Test :
+  
+  Once, Our code is working properly in testing server. we need to do automation testing using Selinium/Junit.
+  
+* Deploy to Production :
+  
+  If Everything is fine then you can directly deploy your code to Production/Client Server.
+  
+Note : If we have error in our code then it will give feedback & it will be corrected. if we have errors in Build, it will give feedback & those errors corrected.
+  The pipeline will work like until it reaches deploy phase.
+  
+  Because of this pipeline, Bugs will be reported fast & get reflected. So, entire development is fast.
+  
+  
       
