@@ -238,8 +238,7 @@ Note : If we have error in our code then it will give feedback & it will be corr
                               |     (Windows/Linux)
                               |
   Jenkins-Master -----------------> Jenkins Slave-2
-                                    (Ubuntu/Linux)
-                              |
+                              |     (Ubuntu/Linux)
                               |
                                ---> Jenkins Slave-3
                                     (Linux/Windows)
