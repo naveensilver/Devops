@@ -234,13 +234,18 @@ Note : If we have error in our code then it will give feedback & it will be corr
   
   By using lable, we can specify/assogn the job to the nodes/Slaves.
   ```
-                                |--->  Jenkins Slave-1
-                                |
-                                |
-  Jenkins-Master ---------------> Jenkins Slave-2
-                                  (Ubuntu/linux)
+                               ---> Jenkins Slave-1
+                              |     (Windows/Linux)
+                              |
+  Jenkins-Master -----------------> Jenkins Slave-2
+                                    (Ubuntu/Linux)
+                              |
+                              |
+                               ---> Jenkins Slave-3
+                                    (Linux/Windows)
   
   ```
+  
   ### Jenkins Set-Up :
   
   
