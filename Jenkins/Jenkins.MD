@@ -333,3 +333,18 @@ Successfully.. Your Jenkins Is Ready !!
     3. Status Info - Build Info, History of jenkins 
     4. Trouble shooting 
     6. Tool & Action - Extra tools shown here 
+	
+**JOB**
+Job is nothing but a Task. Job can Build the code, test the code and deploy this code.
+	
+In Jenkins "New Item" is Used to Create a Job.
+	
+We have types of jobs in Jenkins :
+	
+1. Free style project 
+2. Pipeline 
+3. Multi-configuration project
+4. Folder
+5. Multibranch Pipeline 
+6. Organisation folder 
+
