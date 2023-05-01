@@ -245,6 +245,91 @@ Note : If we have error in our code then it will give feedback & it will be corr
   
   ```
   
-  ### Jenkins Set-Up :
+  ### Jenkins Installation Set-Up :
   
+1. Create an EC2 Instnace in Linux (8080 Port Enable) and Connect the instance.
   
+2. Update all packages
+  
+```
+  sudo yum update -y 
+```
+3. Install Java-11 Version (Recommended)
+  
+```
+ sudo amazon-linux-extras install java-openjdk11 -y 
+```
+4. Install Jenkins (Getting Links from jenkins.io >> Download >> Redhat)
+  
+  * Add Jenkins Repo to Your Yum Repo and Import the Key file from Jenkins-CI to Enable installation from the package
+```
+  sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+  sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+```
+* Upgrade the service 
+```
+  sudo yum upgrade 
+```
+* For Amazon Linux install extra packages #Enterprise edition limited (epel)
+```
+  sudo amazon-linux-extras install epel -y 
+```
+* Install jenkins 
+```
+  sudo yum install jenkins -y 
+```
+5. Start, Enable and check Status Jenkins service
+```
+ sudo systemctl start jenkins
+ sudo systemctl enable jenkins
+ sudo systemctl status jenkins
+```
+6. Connect Jenkins Dashboard In browser 
+  
+	>> Ec2-Instance-Public-IP : 8080
+
+Note: Jenkins server running by default 8080 port. Make sure you enabled 8080 port in security group inbound rules which is attached to ec2 instance.
+
+7. Unlock Jenkins and To Get the Initial Administration Password
+```
+	sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+```
+pwd : 5e5daec716554725b2b1950d728182be
+
+8. Install Suggested Plugins
+
+9. Create First Admin User
+  
+```
+	>> Username :
+	>> Password :
+	>> Conform Password :
+ 	>> Full Name:
+	>> E-mail address : 
+```
+10. Instance Configuration 
+  
+	>> Jenkins URL : http:// ec2-instance-public-ip : 8080
+
+Successfully.. Your Jenkins Is Ready !!
+  
+### Jenkins Dashboard :
+  
+1. New Item - To create a job 
+2. People - To get no. of Users and User ID's
+3. Build History - To get history of build with time and date (Success/Failure)
+4. Manage Jenkins >>  
+    1. System Config :
+        * Configuration System - Configure Global settings and Paths
+        * Global Tool config - Configure the tools, their locations and automatic installers. 
+        * Manage Plugins - Add, Remove, Enable/Disable Plugins
+        * Manage Nodes & Clouds - Add, Remove, Control and Monitor the various nodes that jenkins runs jobs on. (Master-Slave)
+    2. Security - To Secure Jenkins 
+        * Configure Global Security -Configure who is allowed to use/access System.
+        * Manage Credentials - Configure credentials 
+        * Configure Credentials Providers - Configure the Credentials providers and types.
+        * Manage users - Create/Delete/Modify Users that can log in to this jenkins.
+  
+    3. Status Info - Build Info, History of jenkins 
+    4. Trouble shooting 
+    6. Tool & Action - Extra tools shown here 
