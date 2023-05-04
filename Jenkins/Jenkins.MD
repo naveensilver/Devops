@@ -232,7 +232,7 @@ Note : If we have error in our code then it will give feedback & it will be corr
   
   If the slaves are not available, master itself done the job.
   
-  By using lable, we can specify/assogn the job to the nodes/Slaves.
+  By using lable, we can specify/assign the job to the nodes/Slaves.
   ```
                                ---> Jenkins Slave-1
                               |     (Windows/Linux)
@@ -244,6 +244,22 @@ Note : If we have error in our code then it will give feedback & it will be corr
                                     (Linux/Windows)
   
   ```
+	
+### Build and Deploymets Process 
+
+1) Take the latest source code from repo
+
+2) Compile Source code
+
+3) Execute Unit Tests (Junits)
+
+4) Perform Code review 
+
+5) Package code as war file
+
+6) Deploy the war file into server
+
+Note : All the above build and deplyments tasks can be automated using Jenkins tool.
   
   ### Jenkins Installation Set-Up :
   
@@ -335,6 +351,7 @@ Successfully.. Your Jenkins Is Ready !!
     6. Tool & Action - Extra tools shown here 
 	
 **JOB**
+	
 Job is nothing but a Task. Job can Build the code, test the code and deploy this code.
 	
 In Jenkins "New Item" is Used to Create a Job.
