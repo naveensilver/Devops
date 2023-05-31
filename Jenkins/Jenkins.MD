@@ -364,4 +364,338 @@ We have types of jobs in Jenkins :
 4. Folder
 5. Multibranch Pipeline 
 6. Organisation folder 
+	
+
+### Create Free-Style Project Job :
+
+1. Go to Jenkins Dashboard 
+
+2. Click on New item 
+
+	>> Enter Item Name 
+
+	>> Select Free Style Project & Click ok
+
+	>> Enter Description 
+
+	>> Click on 'Build' Tab
+
+	>> Click on 'Add Build Step' and select 'Execute Shell'
+
+3. Enter Below Shell-Script >>
+```
+	touch file.txt
+	echo "Hello Babe, welcome to my jenkins classes" >> file.txt
+	echo "enjoy padagooww..!!"
+```
+4. Apply & Save
+
+Note: With above steps we have created Jenkins Job.
+
+5. Click on 'Build Now' to start job execution.
+
+6. Click on 'Build Number' and then click on 'Console Output' to see job execution details.
+
+=> Jenkins Home Directory in EC2 : /var/lib/jenkins/workspace/
+		$ cd /var/lib/jenkins/workspace/
+
+7. Go to Jenkins home directory and check for the job name => Check the file created inside the job.
+
+Note : For every minute jenkins job will execute.
+
+### Components of Jenkins :
+
+In Jenkins Job, the terms "general," "source code management," "build triggers," "build environment," "build," and "postbuild actions" refer to various aspects of the software development process that Jenkins facilitates and automates.
+
+Here is a brief overview of what each of these terms means in Jenkins:
+
+1. General: This refers to the basic configuration settings of a Jenkins project, such as the project name, description, and the location of the source code repository.
+
+2. Source code management: This refers to the process of managing the source code for a project, including checking it out from a repository, tracking changes, and merging changes back into the repository.
+
+3. Build Triggers: Build triggers are actions that cause Jenkins to start a build. Jenkins can be configured to start a build automatically when changes are pushed to the repository or on a schedule.
+
+4. Build Environment: The build environment refers to the set of tools and configurations that are used to build the project. This may include setting up the necessary software packages, configuring environment variables, and allocating resources.
+
+5. Build: A build is the process of compiling source code into an executable form. Jenkins can be configured to perform a variety of build types, including compilation, testing, packaging, and deployment.
+
+6. Post-Build Actions: Post-build actions are actions that are performed after the build has completed. These may include sending notifications, archiving artifacts, or publishing reports.
+
+## Build Part : 
+
+Q) Create a Free-Style Job To Automate Build Application Using Jenkins 
+
+**JOB-1 :: JENKINS Job with GITHUB + MAVEN - INTIGRATION [Build App]**
+
+[IMAGE]
+
+Pre-Requisites : Java, Git & Maven 
+
+1. Git installation in Jenkins server 
+
+```
+sudo yum install git -y 
+```
+
+2. JDK Installation (Java) 
+
+Jenkins Dashboard > Manage Jenkins > Global Tools Configuration > Add JDK > Choose JDK 8 > Configure Oracle Account Credentials
+
+> JDK Name : JDK 1.8 
+    
+> Version of Java              #We can configure multiple versions of java
+
+> Oracle Login Credentials 
+
+> Save 
+
+* To change specific Java Version:
+
+```
+alternatives --config java
+``` 
+
+Note: In-order to download Jdk software from the oracle, you need to have a account.
+
+> Go to Browser and search "download java 8 jdk "
+
+> Go to Specific windows version and click on download 
+
+> It will ask Login for Oracle 
+
+3. Install Maven:
+
+Jenkins DashBoard > Manage Jenkins > Global Tool Configuration > Add Maven 
+
+> Name : Maven 3.6
+
+> Version : 3.6.1     #We can configure multiple versions of Maven
+
+> Save 
+
+**Sample Git Repo URL'S For Practice :**
+
+Repo-1 : https://github.com/ashokitschool/JAVA-MAVEN-WEB-APP.git
+
+Repo-2 : https://github.com/ashokitschool/maven-web-app.git
+
+
+**Steps To Create Jenkins Job With Git + Maven**
+
+1. Connect To Ec2 Instance in which Jenkins Server got installed 
+
+2. Start Jenkins Server
+
+3. Access Jenkins Server Dashboard and Login with your jenkins Credentials.
+
+4. Create Jenkins Job with Git Hub Repo 
+
+	> New Item 
+
+	> Enter Item Name (Job Name) : <passport-app-dev-job>
+
+	> Select 'Free-style Project' & Click Ok
+
+	> Enter Some 'Description' 
+
+	> Go to 'Source Code Management' Tab and select "Git" 
+
+	> Enter Project 'Git Repo URL' (By Default Master Branch will Execute)
+
+	> Add your Github Account Credentials 
+
+	> Go to 'Build' Tab
+
+	> Click On 'Add Build Step' and Select 'Invoke top level Maven Target' 
+
+	> Select 'Maven Version' and Enter Goals 'clean package'
+
+	> Apply & Save 
+
+Note: With Above Steps We have Created Jenkins Job 
+
+5. Click on 'Build Now' to start job execution 
+
+6. Click on 'Build Number' and then click on 'Console Output' to see job execution details.
+
+> Jenkins Home Directory in Ec2 : cd /var/lib/jenkins/workspace/
+
+7. Go to Jenkins workspace and then go to job folder then goto target folder then see war file.
+
+> Today we are worked 'Build Part' only and Tomorrow We are going to work on 'Deployment Part' that means 'Post build actions' 
+
+
+## Build + Deployment Part :
+
+Q) How to do the deployment into Tomcat Server Using Jenkins ?
+
+Q) How to send a notification to the Development Team by using Jenkins ?
+
+**Job-2 :: JENKINS Job with GITHUB + MAVEN + Tomcat Server - INTIGRATION [Build+Deploy app]**
+
+[IMAGE]
+
+Build + Deployment Job :
+
+1. Developer Push the code in GitHub
+
+2. Clone the Git Repo using Jenkins 
+
+3. Execute the code using maven Goals in Jenkins 
+
+4. Compile the code as war file (JDK) in Jenkins 
+
+5. Deploy War file into Tomcat using Jenkins 
+
+Pre-Requisites :
+
+* Create Ec2 inux VM in AWS Cloud 
+
+* Install Below Softwares in Ec2 Server
+
+> Git 
+
+> Jenkins 
+
+> Tom Cat
+
+* Install Below Software in Jenkins Dashboard Server
+
+> JDK 1.8
+
+> Maven 3.6
+
+> Deploy Container Plugin 
+
+**Steps To Create Jenkins Job With Git + Maven + Tomcat Server**
+
+
+1. Go to Tomcat Server folder and configure below users in "tomcat-users.xml" file 
+
+```
+cd apache-tomcat-9.0.73/
+cd conf/
+vi tomcat-users.xml
+```
+Configure below users in 'tomcat-users.xml' file 
+
+```
+<role rolename="manager-gui" />
+<role rolename="admin-gui" />
+<role rolename="manager-script"/>
+
+<user username="tomcat" password="tomcat" roles="manager-gui" />
+<user username="admin" password="admin" roles="manager-gui,admin-gui,manager-script"/>
+
+```
+
+To Access the Tomcat Server, change the port num : 9090
+
+```
+cd tomcat 
+cd conf/
+vi server.xml 
+```
+
+Giving Access Permissions to All IP Address  (.*)
+
+File Location: <tomcat>/webapps/manager/META-INF/context.xml
+```
+>>
+ <Valve className="org.apache.catalina.valves.RemoteAddrValve"
+         allow=".*" />
+```
+Now start the Tomcat server 
+```
+cd bin 
+./startup.sh 
+```
+Now Access Tomcat Server :: Ec2_Public_IP : 9090
+
+2. Go to Jenkins Dashboard > Manage Jenkins > Plugins > Search for "Deploy to container" plugin > Install without Restart. 
+
+3. Create a Jenkins Job 
+
+	> New Item 
+
+	> Enter Item Name (Job Name)
+
+	> Select Free-style Project & Click Ok
+
+	> Enter Description 
+
+	> Go to "Source Code Management" tab and Select "Git"
+
+	> Enter Project "Git repo : https://github.com/ashokitschool/maven-web-app.git"
+
+	> Add your Github Account Credentials 
+
+	> Go to "Build" Tab
+
+	> Click on Add Build step and select "Invoke Top Level Maven Targets"
+
+	> Select Maven and Enter Goals "clean package"
+
+	> Click on "Post Build Action" and Select "Deploy war/war to container" option
+
+	> Give Path of war file (you can give like this also **/*.war ) Context Path means "Project Name"
+
+	> Select "Add Container" and Click on "Tomcat 9.x Remote" 
+
+		> Add Tomcat User Permissions (Username: admin, Pwd: admin)
+
+	> TomCat URL = http://13.50.106.153:9090/
+
+	> Apply & Save 
+
+	> Build the Job 
+
+Note: With Above Steps We have Created Jenkins Job 
+
+4. Click on 'Build Now' to start job execution 
+
+5. Click on 'Build Number' and then click on 'Console Output' to see job execution details.
+
+> Jenkins Home Directory in Ec2 : cd /var/lib/jenkins/workspace/
+
+6. Go to Jenkins workspace and then go to job folder then goto target folder then see war file.
+
+Note: If you want to Build + Deployment the Job Automatically
+
+We will use 'Build Triggers' and We can schedule the job using 'cron' syntax.
+
+> Go to Build Trigger and Select 'Poll SCM'
+
+> Schedule " * * * * * " , means schedule the job every minute.
+
+### Build Triggers :
+
+Poll SCM means when you modify the code in the git repository automatically jenkins is going to execute the job. 
+
+Build Periodically : It is like automatic job execution schedule. it will execute the job automatically when the code is changed or not.
+
+
+
+
+
+
+
+
+
+
+
+
+## Interview Questions : 
+
+Q) How to stop Jenkins Server in Browser
+
+Access below URL in Browser to stop Jenkins Server.
+
+URL : http://Ec2-IP : 8080/exit 
+
+> 166.56.16.1:8080/exit 
+
+> Click 'Retry using post'
+
+> Shutting Down Automaticaly  
 
