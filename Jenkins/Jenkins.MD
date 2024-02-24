@@ -442,6 +442,19 @@ Here is a brief overview of what each of these terms means in Jenkins:
 
 6. Post-Build Actions: Post-build actions are actions that are performed after the build has completed. These may include sending notifications, archiving artifacts, or publishing reports.
 
+## Dashboard > Job > Configuration 
+
+1. General :
+* Discard Old Builds - Used To Delete the Previous Build automatically.
+```
+
+```
+	* GitHub Project - 
+	* This Project is Parameterised
+	* Throttle Builds
+	* Execute Concurrent Builds if Necessary
+
+
 ## Build Part : 
 
 Q) Create a Free-Style Job To Automate Build Application Using Jenkins 
