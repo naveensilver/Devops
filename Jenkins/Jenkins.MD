@@ -545,7 +545,17 @@ Note: With Above Steps We have Created Jenkins Job
 
 > Today we are worked 'Build Part' only and Tomorrow We are going to work on 'Deployment Part' that means 'Post build actions' 
 
-
+## Dashboard > Job1 
+```
+>> Status - Job Status 
+>> Changes - Job Changes 
+>> Workspace - We can see Job Output & We can download the output files and we can delete entire workspace files.
+>> Build Now - Build the job
+>> Cofigure - We can made the job changes again.
+>> Delete Project - Delete the job
+>> GitHub - 
+>> Rename - To Rename job
+```
 ## Build + Deployment Part :
 
 Q) How to do the deployment into Tomcat Server Using Jenkins ?
