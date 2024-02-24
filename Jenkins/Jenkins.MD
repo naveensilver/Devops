@@ -45,7 +45,7 @@ CI Server = Automatic Build + Automatic Test
 
 Here, The Build, Test and Deploy all the activities are performed in a single CI server.
 
-  <Image>
+![CI Server](https://github.com/naveensilver/Devops/assets/120022254/28be9557-d2aa-470d-b3f0-9b4cfa91d4aa)
     
 If the code fails in CI server, we can send back to developers and developers fix the bugs.(Repeat)
     
