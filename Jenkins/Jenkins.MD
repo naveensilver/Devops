@@ -81,8 +81,7 @@ Continuous Deployment is a process, where code changes are automatically built, 
 Ex: Spotify , FacebOOK
 
 In Continuous Deployment, Deploy to production - Automatically. 
-
-    
+   
 ### Architecture of CI/CD :
     
 ![Architecture of CI-CD](https://github.com/naveensilver/Devops/assets/120022254/c4f9477f-8855-43a1-abad-d33e292448ab)     
@@ -110,8 +109,7 @@ In Continuous Deployment, Deploy to production - Automatically.
    - Increases Customers satisfaction.
       
    - Reduce the cost.
-      
-      
+            
 ### CI/CD Pipeline :
       
 It is one of the most important role for devops engineers.
@@ -125,8 +123,7 @@ It is Combination of multiple Jobs/Tasks.
 It's looks like a software developement life cycle(SDLC).
   
 Let's consider an example, if you are developing a web application.
-  
-  
+   
 * Version control : 
   
   Here, developers need to write code for web application. So, it needs to be committed by using Version control system like GIT or SVN.
@@ -179,8 +176,7 @@ Note : If we have error in our code then it will give feedback & it will be corr
   The pipeline will work like until it reaches deploy phase.
   
   Because of this pipeline, Bugs will be reported fast & get reflected. So, entire development is fast.
-  
-  
+   
 ## Jenkins :
   
   Jenkins is an Open Source Project.
