@@ -538,8 +538,37 @@ Note : If you want use Bit Bucket Repo, we need to install Bit Bucket Plugin.
 
 3. Build Triggers :
 
-* Build Periodically - Used to Automate Build Schedule. Here, we use Cron Syntax " ***** "
+i) Build Periodically - Used to Automate Build Schedule. Here, we use Cron Syntax " * * * * * "
 
+### CRON Syntax :
+```
+It has 5-Stars, Each star has single space.
+
+	> 1st * Represents Minutes.
+	> 2nd * Represents Hours (24 hrs)
+	> 3rd * Represents Day of the Month (31)
+	> 4th * Represents Month
+	> 5th * Represents Day of the Week (7) [Sunday=0 to Saturday=7]
+
+```
+Cron Website : https://crontab.guru/
+
+Ex1: 28 Dec 7:45AM WED - Cron Syntax is " 45 7 28 12 3 "
+
+Ex2: " * * * * * " Means Build the Job at Every Minute. 
+
+Note: If you want to stop the build automation, we have to Remove the Cron Syntax.
+
+ii) Poll SCM - Source Code Management - Build the Job in Particular Day & Particular Time 
+
+Here, When the changes happends it will Build Automatically in a Particular Time.
+
+Scenario, When the Developer changes the code. It will build the job automatically at a particular time.
+
+Q) Diff B/w Build Periodically and Poll SCM 
+
+In Build Periodically, Builds the job automatically when the changes done or not.
+In Poll SCM, Builds the job automatically when the changes done by developer at a particular time.
 
 ## Build Part : 
 
