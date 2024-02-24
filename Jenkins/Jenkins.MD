@@ -412,10 +412,15 @@ Here, We Can See BUILD HISTORY with 'Build Number'.
 
 6. Click on 'Build Number' and then click on 'Console Output' to see job execution details.
 
-=> Jenkins Home Directory in EC2 : /var/lib/jenkins/workspace/
-		$ cd /var/lib/jenkins/workspace/
+Here, We can see the output of jenkins job in Console output.
 
 7. Go to Jenkins home directory and check for the job name => Check the file created inside the job.
+
+   Jenkins Home Directory in EC2 : /var/lib/jenkins/workspace/
+```
+	cd /var/lib/jenkins/workspace/
+```
+Here, We will get the output of Jenkins job.
 
 Note : For every minute jenkins job will execute.
 
