@@ -538,7 +538,7 @@ Note : If you want use Bit Bucket Repo, we need to install Bit Bucket Plugin.
 
 3. Build Triggers :
 
-i) Build Periodically - Used to Automate Build Schedule. Here, we use Cron Syntax " * * * * * "
+* Build Periodically - Used to Automate Build Schedule. Here, we use Cron Syntax " * * * * * "
 
 ### CRON Syntax :
 ```
@@ -559,16 +559,31 @@ Ex2: " * * * * * " Means Build the Job at Every Minute.
 
 Note: If you want to stop the build automation, we have to Remove the Cron Syntax.
 
-ii) Poll SCM - Source Code Management - Build the Job in Particular Day & Particular Time 
+* Poll SCM - Source Code Management - Build the Job in Particular Day & Particular Time 
 
-Here, When the changes happends it will Build Automatically in a Particular Time.
+Here, When the changes happens, it will Build Automatically in a Particular Time.
 
 Scenario, When the Developer changes the code. It will build the job automatically at a particular time.
 
 Q) Diff B/w Build Periodically and Poll SCM 
 
 In Build Periodically, Builds the job automatically when the changes done or not.
+
 In Poll SCM, Builds the job automatically when the changes done by developer at a particular time.
+
+* Build After Other Project Are Built:
+
+
+4. Build Environment:
+
+5. Build Steps:
+
+> i) Execute Shell - Used to Run Commands 
+
+	> Here, We can create file/folder,delete file/folder,Print data...etc.
+
+
+6. Post-Build Actions:
 
 ## Build Part : 
 
