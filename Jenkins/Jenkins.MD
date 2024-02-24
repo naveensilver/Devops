@@ -85,8 +85,7 @@ In Continuous Deployment, Deploy to production - Automatically.
     
 ### Architecture of CI/CD :
     
-<iMAGE>
-      
+![Architecture of CI-CD](https://github.com/naveensilver/Devops/assets/120022254/c4f9477f-8855-43a1-abad-d33e292448ab)     
       
 **Uses/Benifits/Advanages of CI/CD :**
       
