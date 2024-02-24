@@ -445,6 +445,7 @@ Here is a brief overview of what each of these terms means in Jenkins:
 ## Dashboard > Job > Configuration 
 
 1. General :
+
 * Discard Old Builds - Used To Delete the Previous Build automatically.
 
 	> Strategy : Log Rotation
@@ -455,7 +456,7 @@ Here is a brief overview of what each of these terms means in Jenkins:
 
 * GitHub Project :
 
-	>> Project URL : Git Hub Link 
+	> Project URL : Git Hub Link 
 
 * This Project is Parameterised :
 
@@ -480,11 +481,64 @@ Here is a brief overview of what each of these terms means in Jenkins:
 	> Save and Click On Build With Paramters 
 
 	> Select Particular Branch and Build.
-		    
+
+> iii) Credential Parameter - Whenever you want to intigrate the tools with jenkins like Ansible, Docker, Tomacat..
+
+	> User name & Password 
+
+> iv) File Parameter - If the Build Files are Present in Local System (Laptop)
+
+	> File Location - DevOps\Ashok IT\DevOps PlayList
+
+	> Save & Build with Parameters 
+
+	> Select Files and Builds 
+
+	> To check the Build Output : cd /var/lib/jenkins/workspace/jobs/DevOps/Ashok IT/DevOps PlayList
+
+> v) String Parameter - When you want to pass the information while Build.(Single line)
+
+	> Name : User Name 
+
+	> Default Value : Naveen
+
+	> Description: Here i Provided my details 
+
+	> Build with parameters 
+
+> vi) Multi-String Parameter - When you want to pass the multiple info while build. (Multi line)
+
+	> Name : User Name 
+
+	> Default Value : Naveen | Silver | i am Devops engineer
+
+	> Description: Here i Provided my details 
+
+	> Build with parameters 
+
+> vii) Password Parameter - It is similar to Credential Parameter.
+
+> vii) Run Parameter - When you want to run the script that time we use Run Parameter.
 
 * Throttle Builds:
 
 * Execute Concurrent Builds if Necessary
+
+2. Source code management :
+
+* None 
+
+* Git 
+
+> Repo URL :
+
+> Credentials : 	+(Add)
+
+Note : If you want use Bit Bucket Repo, we need to install Bit Bucket Plugin.
+
+3. Build Triggers :
+
+* Build Periodically - Used to Automate Build Schedule. Here, we use Cron Syntax " ***** "
 
 
 ## Build Part : 
