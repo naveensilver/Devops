@@ -460,6 +460,7 @@ Here is a brief overview of what each of these terms means in Jenkins:
 * This Project is Parameterised :
 
 > i) Boolean Parameterised - Used in True/False Condition
+
 	> Name : Jenkins 
 
 	> Set by default - yes 
