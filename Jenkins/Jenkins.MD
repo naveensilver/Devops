@@ -31,7 +31,7 @@ Note : Each activity performing in different server.
   
 **AFTER C.I :**
   
-![After CI Image](https://github.com/naveensilver/Devops/assets/120022254/4a1994e8-0d89-4edc-9d01-d07b7e165141)
+![After CI Image](https://github.com/naveensilver/Devops/assets/120022254/b2c4fffb-16b0-478f-a8cf-594703e0830f)
 
 Here, Developers Write the code and store in GitHub Repo.
   
