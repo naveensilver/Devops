@@ -448,7 +448,9 @@ Here is a brief overview of what each of these terms means in Jenkins:
 * Discard Old Builds - Used To Delete the Previous Build automatically.
 
 	> Strategy : Log Rotation
+
 	> Days to keep builds : 10 
+
 	> Max # of Build Keep : 10 (it keeps the latest 10 builds and delete the old builds)
 
 * GitHub Project :
@@ -458,11 +460,16 @@ Here is a brief overview of what each of these terms means in Jenkins:
 * This Project is Parameterised :
 
 > i) Boolean Parameterised - Used in True/False Condition
-	>> Name : Jenkins 
-	>> Set by default - yes 
-	>> Description - Jenkins is in Active
-	>> Save and Click on Build with Paramters 
-	>> Build
+	> Name : Jenkins 
+
+	> Set by default - yes 
+
+	> Description - Jenkins is in Active
+
+	> Save and Click on Build with Paramters 
+
+	> Build
+
 > ii) Choice Parameters - 
 
 * Throttle Builds:
