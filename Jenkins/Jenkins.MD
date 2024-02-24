@@ -400,7 +400,7 @@ We have types of jobs in Jenkins :
 
 5. Click on 'Build Now' to start job execution.
 
-   Here, We Can See BUILD HISTORY with 'Build Number'.
+   Here, We Can See 'BUILD HISTORY' with 'Build Number'.
 
 ```
 	#1 Blue Colour   --->  Process
@@ -500,7 +500,6 @@ Repo-1 : https://github.com/ashokitschool/JAVA-MAVEN-WEB-APP.git
 
 Repo-2 : https://github.com/ashokitschool/maven-web-app.git
 
-
 **Steps To Create Jenkins Job With Git + Maven**
 
 1. Connect To Ec2 Instance in which Jenkins Server got installed 
@@ -545,7 +544,7 @@ Note: With Above Steps We have Created Jenkins Job
 
 > Today we are worked 'Build Part' only and Tomorrow We are going to work on 'Deployment Part' that means 'Post build actions' 
 
-## Dashboard > Job1 
+## Dashboard > Job
 ```
 >> Status - Job Status 
 >> Changes - Job Changes 
@@ -556,6 +555,18 @@ Note: With Above Steps We have Created Jenkins Job
 >> GitHub - 
 >> Rename - To Rename job
 ```
+
+## Dashboard > Job > #1
+
+```
+>> Status - Build Status 
+>> Change - Build Changes
+>> Console O/p - History of Job/Build
+	> view as Plain - Console output in plain text.
+>> Edit Build Infp - Rename Build Name 
+>> Delete Build - Delete Build
+```
+
 ## Build + Deployment Part :
 
 Q) How to do the deployment into Tomcat Server Using Jenkins ?
