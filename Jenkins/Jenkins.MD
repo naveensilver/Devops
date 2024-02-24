@@ -22,12 +22,13 @@ These Jar/War Files tested in another server using Selinium/Junit.
   
 If we get any bugs in source code, we can send it back to the developers and the developers fix the bugs/errors and again stored in github.
 
-Note : Each activity performing in different server.
+Note : Each activity performing in different server. So, Manual work is high.
   
-  - Manual work is high.
   - Build & Test in different servers
   - For Build = Maven/Ant/Gradle
   - For Test = Selenium/JUnit
+
+To Reduce Manual work. We use Jenkins to automate everthing.
   
 **AFTER C.I :**
   
