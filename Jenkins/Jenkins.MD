@@ -47,7 +47,7 @@ Here, The Build, Test and Deploy all the activities are performed in a single CI
 
 ![CI Server](https://github.com/naveensilver/Devops/assets/120022254/28be9557-d2aa-470d-b3f0-9b4cfa91d4aa)
     
-If the code fails in CI server, we can send back to developers and developers fix the bugs.(Repeat)
+If the code fails in CI server, we can send back to developers and developers fix the bugs.(Repeat Process)
     
 Once the code is success, we can deploy the code automatically in CI server.
     
