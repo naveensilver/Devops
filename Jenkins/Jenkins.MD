@@ -313,7 +313,7 @@ pwd : 5e5daec716554725b2b1950d728182be
 9. Create First Admin User
   
 ```
-	>> Username :
+	>> Username : 
 	>> Password :
 	>> Conform Password :
  	>> Full Name:
