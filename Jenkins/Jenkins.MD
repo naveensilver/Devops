@@ -223,10 +223,10 @@ Note : If we have error in our code then it will give feedback & it will be corr
   
   
   ### MASTER-SLAVE ARCHITECTURE / MASTER ROLES :
+
+  Master assign a jobs to the slaves. That slaves works on assigned Job/Work.
   
-  Master assign a jobs to the slaves. that slaves works on assigned Job/Work.
-  
-  If the slaves are not available, master itself done the job.
+  If the slaves are not available, Master itself done the job.
   
   By using lable, we can specify/assign the job to the nodes/Slaves.
   ```
