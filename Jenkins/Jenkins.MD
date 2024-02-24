@@ -372,7 +372,6 @@ We have types of jobs in Jenkins :
 5. Multibranch Pipeline 
 6. Organisation folder 
 	
-
 ### Create Free-Style Project Job :
 
 1. Go to Jenkins Dashboard 
@@ -400,6 +399,16 @@ We have types of jobs in Jenkins :
 Note: With above steps we have created Jenkins Job.
 
 5. Click on 'Build Now' to start job execution.
+
+Here, We Can See BUILD HISTORY with 'Build Number'.
+
+```
+	#1 Blue Colour   --->  Process
+	#1 Green Colour  ---> Success
+	#1 Red Colour    ---> Failed
+	#1 Black Colour  ---> Abort/Cancel
+	#1 Orange Colour ---> Pending
+```
 
 6. Click on 'Build Number' and then click on 'Console Output' to see job execution details.
 
