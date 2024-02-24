@@ -259,7 +259,7 @@ Note : All the above build and deplyments tasks can be automated using Jenkins t
   
   ### Jenkins Installation Set-Up :
   
-1. Create an EC2 Instnace in Linux (8080 Port Enable) and Connect the instance.
+1. Create an EC2 Instnace in Linux (Custom TCP + 8080 Port Enable) and Connect the instance.
   
 2. Update all packages
   
