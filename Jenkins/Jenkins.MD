@@ -187,11 +187,11 @@ Note : If we have error in our code then it will give feedback & it will be corr
   
   Jenkins has Community-Supported & Free to use.
   
-  Jenkins is first choice for Continuous Integration and It consists of Plugins. using Plugins we will automate the tasks.
+  Jenkins is first choice for Continuous Integration and It consists of Plugins.
   
   * Plugin is nothing but a small software, that we used to add some extra features to our jenkins dashboard.
   
-  Jenkins Automates the entire SDLC 
+  Using Plugins, Jenkins Automates the entire SDLC 
   
   #### IMAGE ###
   
