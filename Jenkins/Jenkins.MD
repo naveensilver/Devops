@@ -396,11 +396,11 @@ We have types of jobs in Jenkins :
 ```
 4. Apply & Save
 
-Note: With above steps we have created Jenkins Job.
+   Note: With above steps we have created Jenkins Job.
 
 5. Click on 'Build Now' to start job execution.
 
-Here, We Can See BUILD HISTORY with 'Build Number'.
+   Here, We Can See BUILD HISTORY with 'Build Number'.
 
 ```
 	#1 Blue Colour   --->  Process
@@ -412,7 +412,7 @@ Here, We Can See BUILD HISTORY with 'Build Number'.
 
 6. Click on 'Build Number' and then click on 'Console Output' to see job execution details.
 
-Here, We can see the output of jenkins job in Console output.
+   Here, We can see the output of jenkins job in Console output.
 
 7. Go to Jenkins home directory and check for the job name => Check the file created inside the job.
 
@@ -420,7 +420,7 @@ Here, We can see the output of jenkins job in Console output.
 ```
 	cd /var/lib/jenkins/workspace/
 ```
-Here, We will get the output of Jenkins job.
+   Here, We will get the output of Jenkins job.
 
 Note : For every minute jenkins job will execute.
 
