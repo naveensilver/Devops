@@ -282,7 +282,7 @@ Note : All the above build and deplyments tasks can be automated using Jenkins t
 ```
   sudo yum upgrade 
 ```
-* For Amazon Linux install extra packages #Enterprise edition limited (epel)
+* For Amazon Linux install extra packages #Extra Packages for Enterprise Linux (epel)
 ```
   sudo amazon-linux-extras install epel -y 
 ```
