@@ -120,7 +120,7 @@ CI/CD Pipeline is a step by step process.
   
 It is Combination of multiple Jobs/Tasks.
   
-<Image>
+![CI-CD Pipeline](https://github.com/naveensilver/Devops/assets/120022254/34fbd588-41a2-46b2-a00a-74eec067929e)
 
 It's looks like a software developement life cycle(SDLC).
   
