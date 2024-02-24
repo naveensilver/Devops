@@ -12,7 +12,7 @@ Build and Test - These Two activities performing in a single task.
 
 **BEFORE C.I :**
 
-<image>
+![CI Image](https://github.com/naveensilver/Devops/assets/120022254/827fe886-97d6-492e-8d3c-9d4ee95c1240)
   
 Multiple developers write the code, and the code is stored in Git Hub Repo.
   
