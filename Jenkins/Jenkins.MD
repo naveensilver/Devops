@@ -187,7 +187,7 @@ Note : If we have error in our code then it will give feedback & it will be corr
   
   Jenkins has Community-Supported & Free to use.
   
-  Jenkins is first choice for Continuous Integration and It consists of Plugins 
+  Jenkins is first choice for Continuous Integration and It consists of Plugins. using Plugins we will automate the tasks.
   
   * Plugin is nothing but a small software, that we used to add some extra features to our jenkins dashboard.
   
@@ -211,7 +211,7 @@ Note : If we have error in our code then it will give feedback & it will be corr
   
   **Advantages :**
   
-  Jenkisn follows Master-Slave Architecture.
+  Jenkins follows Master-Slave Architecture.
   
   You can write own plugin, can use community plugins also.
   
