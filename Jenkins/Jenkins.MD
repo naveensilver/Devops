@@ -324,6 +324,17 @@ pwd : 5e5daec716554725b2b1950d728182be
 	>> Jenkins URL : http:// ec2-instance-public-ip : 8080
 
 Successfully.. Your Jenkins Is Ready !!
+
+Q) How to know/Change the single tool multiple versions in one server.
+
+Explanation : For Ex, if you have 2 java versions in single server (Java11 and Java-1.8.0)
+
+To check Change the versions of single tool. we use command 
+
+```
+	update-alternatives --config java
+```
+Here, we will get the versions list of single tool and by entering the version S.No we can re-install the specific version.
   
 ### Jenkins Dashboard :
   
