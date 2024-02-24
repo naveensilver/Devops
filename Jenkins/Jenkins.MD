@@ -471,7 +471,16 @@ Here is a brief overview of what each of these terms means in Jenkins:
 
 	> Build
 
-> ii) Choice Parameters - 
+> ii) Choice Parameters - When you have multiple branches but you want to build single branch at the time we use Choice Parameter.
+
+	> Name : Branches 
+
+	> Choices : Master Main Branch1 Branch2 
+
+	> Save and Click On Build With Paramters 
+
+	> Select Particular Branch and Build.
+		    
 
 * Throttle Builds:
 
