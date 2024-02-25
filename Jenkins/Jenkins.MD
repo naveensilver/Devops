@@ -567,9 +567,9 @@ Scenario, When the Developer changes the code. It will build the job automatical
 
 Q) Diff B/w Build Periodically and Poll SCM 
 
-In Build Periodically, Builds the job automatically when the changes done or not.
+Poll SCM : It will Builds the job automatically when the changes done by developer at a particular time.
 
-In Poll SCM, Builds the job automatically when the changes done by developer at a particular time.
+Build Periodically : It is like automatic job execution schedule. it will execute the job automatically when the code is changed or not.
 
 * Build After Other Project Are Built - Which is Used in Pipeline Jobs.
 
@@ -870,6 +870,7 @@ We will use 'Build Triggers' and We can schedule the job using 'cron' syntax.
 Poll SCM means when you modify the code in the git repository automatically jenkins is going to execute the job. 
 
 Build Periodically : It is like automatic job execution schedule. it will execute the job automatically when the code is changed or not.
+
 
 
 
