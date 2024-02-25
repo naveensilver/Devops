@@ -571,7 +571,19 @@ In Build Periodically, Builds the job automatically when the changes done or not
 
 In Poll SCM, Builds the job automatically when the changes done by developer at a particular time.
 
-* Build After Other Project Are Built:
+* Build After Other Project Are Built - Which is Used in Pipeline Jobs.
+
+It will build the job when the other job is executed. (Upstream and Downstream)
+
+> Trigger Only Build is stable - 
+
+> Tigger even if the build is unstable
+
+> Trigger if the build fails 
+
+> Always Trigger, Even the build aborted
+
+* Webhook trigger for GITScm Polling
 
 
 4. Build Environment:
