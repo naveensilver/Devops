@@ -575,13 +575,13 @@ In Poll SCM, Builds the job automatically when the changes done by developer at 
 
 It will build the job when the other job is executed. (Upstream and Downstream)
 
-> Trigger Only Build is stable - 
+	> Trigger Only Build is stable - It will build the Job, when upstream Job is Success.
 
-> Tigger even if the build is unstable
+	> Tigger even if the build is unstable - It will Build the Job, When the Upstream Job is in Unstable either success or failure.
 
-> Trigger if the build fails 
+	> Trigger if the build fails - It will Build the Job, when the Upstream Job Fails.
 
-> Always Trigger, Even the build aborted
+	> Always Trigger, Even the build aborted - Cancel the Build
 
 * Webhook trigger for GITScm Polling
 
