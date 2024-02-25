@@ -1236,7 +1236,184 @@ Authentication means who can login into our application.
 
 Authorization means once they login what the users can do in application
 
-==========================================================================================================
+# MASTER & SLAVE
+
+Q) Why Jenkins Master & Slave Configurations ? 
+
+When we build the jobs in a single jenkins master node then jenkins uses the resource of the base machine and if no executor is available then the jobs are queued in jenkins server.
+
+Sometimes you might need several different environments to test your builds. this cannot be done by a single jenkins server.
+
+It is recommended not to run different jobs in the same system that required a different environment. In such scenarios where we need a different machine with different environmet that takes the specific job from the master to build.
+
+On the same jenkins setup, multiple teams are working with their jobs. all jobs are running on same base operating system and the base operating system has limited resources.
+
+To overcome this problem, jenkins provided Distributed Architecture. i.e Jenkins Master-Slave Architecture.
+
+(OR)
+
+Q) Why we need to go for Master-Slave config ? (IMPORTANT)
+
+In realtime, we can take jenkins s/w in one machine and we can create the jobs in that jenkins. if we run multiple jobs at a time then burden will be increased on jenkins machine. 
+
+So, To Reduce the burden on jenkins we are going to use master and slave architecture.
+
+No need to install the Jenkins S/W in every slave machine, just we will install JVM (Java) i.e, Jenkins Dependency is JAVA.
+
+## Master-Slave Architecture :
+
+Jenkins uses a Master-Slave Architecture to manage distributed builds. the machine where we install jenkins software will be jenkins master and that run's on port 8080 by default. 
+
+On the slave machine, we install a program called Agent. This agent requires JVM. This Agent executes the tasks provided by Jenkins Master.
+
+The Jenkins jobs created on Jenkins Master and Jenkins Jobs execution will happen in Slave machine.
+
+We can launch 'N' no. of agents and we can configure which task will be run on which agent server from jenkins master by assigning the agent to the task.
+
+### Jenkins Master
+
+Your main Jenkins Server is the Master. the master's job is to handle:
+
+a) Scheduling build jobs.
+
+b) Dispatching builds to the slaves for the actual execution.
+
+c) Monitor the slaves (Possibly taking them online and offline as required).
+
+d) Recording and Presenting the build results.
+
+e) A master instance of jenkins can also execute build jobs directly.
+
+### Jenkins Slave
+
+A slave is a java executable that runs on remote machine. Following are the characteristics of jenkins slave:
+
+a) It hears request from the jenkins master instance.
+
+b) Slaves can run on variety of Operating systems.
+
+c) The job of slave is to do as they told to, which involves executing build jobs dispached by the master.
+
+d) You can configure a project to always run on a particular slave machine or a particular type of slave machine , or simply let jenkins pick the next slave available.
+
+Advantages :
+
+-- Work load is Destributed.
+
+-- Faster Execution.
+
+-- Deployment Faster.
+
+### Working With Master-Slave Architecture
+
+
+Step-1 : Create Jenkins Master
+
+1) Create Ec2 Instance With Key-Pair(.Pem)
+2) Connect Ec2 Using Mobaxterm 
+3) Install Git Client  $ sudo yum install git -y 
+4) Install Java S/w  $ sudo yum install java-1.8.0-openjdk -y 
+5) Install Jenkins Server
+6) Add Git, JDK, Maven Plugins.
+7) Enable Jenkins Port No. in Security Groups
+8) Access Jenkins Server in Browser and Login.
+
+
+Step-2 : Create Jenkins Slave
+
+1) Create Ec2 Instance 
+2) Connect Ec2 Using Mobaxterm 
+3) Install Git Client  $ sudo yum install git -y 
+4) Install Java S/w  $ sudo yum install java-1.8.0-openjdk -y 
+5) Create one directory in /home/ec2-user (ex: slavenode)
+
+
+Step-3 : Configure Slave Node in Jenkins Master Node Server
+
+> Go to Jenkins Dashboard 
+
+> Go To Manage Jenkins 
+
+> Go to Manage Node & Clouds 
+
+> Click on 'New Node', Enter Node Name and select 'Permanent Agent'
+
+> No. of executors : 1
+
+Note: if u want to run 3 jobs at a time, you can take 3 executors.
+
+> Enter Remote Root Directory (/home/ec2-user/slavenode)
+
+> Enter Label name as 'Slave-1'
+
+> Usage "Use this node as much as possible"
+
+> Select Launch Method as 'Launch Agents Via SSH'
+
+	> Give Host as 'Slave VM Public DNS URL' Ex: ec2-3-110-223-251.ap-souch-1.compute.amazonaws.com (Or) Slave Private IP
+	
+	> Add Credentials (select kind as : SSH username with Private key)
+	
+	> Enter Username as : ec2-user 
+	
+	> Select Private as Enter directory and add private key.
+
+Note: Open Gitbash From your .pem file location and execute below command to get private key from pem file 
+
+	$ cat <key-pair-file-name>.pem
+
+	> It will display private key on gitbash terminal (Copy and Paste in Jenkins)
+
+> Select Host key strategy as 'Manually trusted key Varification Strategy'/ 'Keep this agent online as much as possible' 
+
+> Click on Apply & Save (we can see configure slave)
+
+> Successfully slave-1 is created 
+
+> With Above steps Master-Slave Configurations Completed.
+
+Step-4 : Create Job and Execute
+
+> Go to Jenkins Server and Create a Job
+
+> Go to "General" Sections in Jenkins Job
+
+> Select 'Restict where this project can be run'
+
+Note: If you will not select this option, Jenkins Job will be excuted in Master node' Path: /var/lib/jenkins/workspace/[Jobname]
+
+	> Label Expression : slave-1
+
+> Configure the Remaining Sections (Scm, Build triggers, build, post-build actions)
+
+> Build the Job and the Job will executed on slave node.
+
+> Check the console output and We can see Build slave Path : /home/ec2-user/slavenode/workspace/[jobname]
+
+> Go slave server and check the excution Output 
+
+ Note: Using Master and Slave, we can also execute in Master as well as slave server.
+
+==========================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## Interview Questions : 
