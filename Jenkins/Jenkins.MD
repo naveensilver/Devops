@@ -1230,11 +1230,13 @@ Then, We get a New Options "Manage and Assign Roles"
 
 Note: Log-out from Admin account and Log-in using Above DevOps, Dev, Test team Credentials.
 
+Q) Diff B/w Authentication & Authorization
 
+Authentication means who can login into our application.
 
+Authorization means once they login what the users can do in application
 
-
-
+==========================================================================================================
 
 
 ## Interview Questions : 
