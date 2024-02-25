@@ -865,13 +865,252 @@ We will use 'Build Triggers' and We can schedule the job using 'cron' syntax.
 
 > Schedule " * * * * * " , means schedule the job every minute.
 
-### Build Triggers :
+## Jenkins Pipeline
 
-Poll SCM means when you modify the code in the git repository automatically jenkins is going to execute the job. 
+The Sequence of jobs execution is called as "Pipeline".
 
-Build Periodically : It is like automatic job execution schedule. it will execute the job automatically when the code is changed or not.
+For our application we will use multiple environments like below 
+
+> DEV 
+
+> SIT 
+
+> UAT 
+
+> PILOT 
+
+> PROD 
+
+For every environment, one job will be created.
+
+> JENKINS_DEV_JOB ----------> DEV Environmet (Dev Server)
+
+> JENKINS_SIT_JOB -----------> SIT Environmet (SIT Server)
+	
+> JENKINS_UAT_JOB ----------> UAT Environmet (UAT Server)
+
+> JENKINS_PILOT_JOB --------> PILOT Environmet (Pilot Server)
+
+> JENKINS_PROD_JOB --------> PROD Environmet (Prod Server)
+
+If we want to deploy code changes to all environmets then it is recommended to create Build pipeline.
+
+By using Build pipeline, we can execute Jenkins Jobs Sequentially.
+
+Note: Instead of executing each job manually, we can create Build pipeline. So, we can execute jobs automatically.
+
+PIPELINE-Task :
+=============
+
+If Code commit happend in github then deploy code into DEV server.
+
+If Dev Server Deploy successful, then deploy code into SIT Environment.
+
+If SIT deployments successful, then deploy code into UAT environment.
+
+Steps to Configure Jobs and Execute Jobs In Sequences
+------------------------------------------------------
+
+1. Create Ec2 VM and install Tomcat Server (Dev Server)
+	> Connect Dev Instance and Access the Dev Tomcat Server
+
+2. Create Ec2 VM and install Tomcat Server (SIT Server)
+	> Connect Dev Instance and Access the Dev Tomcat Server
+
+3. Create Ec2 VM and install Tomcat Server (UAT Server)
+	> Connect Dev Instance and Access the Dev Tomcat Server
+
+4. Create Ec2 VM and install Jenkins
+
+5. Install Jdk, Maven, Git, Deploy to container plugin and Build Pipeline Plugin in Jenkins Server
+
+6. Create Jobs in Jenkins Server
+
+	i) DEV-Job --------------> Dev Server
+
+	> Create a "Dev_Job" Using Free-sytle Project
+
+	> General, Enter Description "Dev-Job"
+
+	> Go to SCM, Select Git and Enter Repo URL
+
+	> Build Trigger, Click on Poll SCM and Schedule " * * * * * " (Every min, it is going to check the repo)
+
+ 	> Build Environment, Select "Delete work space before build starts"
+
+	> Build Steps, Select "Invoke top-level Maven Targets" and Enter Goal "clean package"
+
+	> Post Build Action, Select "Deploy War/ear to container" and Give war file path "**/*.war" #"Deploy to container" Plugin must be installed. 
+
+	> Context Path "Dev-Project-Web"
+
+		> Add Container "Tomcat 9.x"
+
+		> Paste Dev-Tomcat Server URL : http://54.556.664.45:8080/
+
+	> Apply & Save.
+
+	ii) SIT-Job  --------------> SIT Server  (SIT-Job should execute if DEV-Job is stable )
+
+	> Create a SIT_Job Using Free-sytle Project
+	
+	> General, Enter Description "SIT-Job"
+	
+	> Go to SCM, Select Git and Enter "Repo URL"
+	
+	> Build Trigger, Select "Build after other Project are build"
+
+		> Project to watch " Dev_Job" 
+
+		> Select 'Tigger only if build is stable"
+
+	> Build Environment, Select "Delete work space before build starts"
+	
+	> Build Steps, Select "Invoke top-level Maven Targets" and Enter Goal "clean Package"
+	
+	> Post Build Action, Select "Deploy War/ear to container" and Give war file path "**/*.war"
+	
+	> Context Path "SIT-Project-Web"
+		
+		> Add Container "Tomcat 9.x"
+		
+		> Paste SIT-Tomcat Server URL : http://54.556.664.46:8080/
+	
+	> Apply & Save.
+
+	iii) UAT-Job---------------> UAT Server (UAT-Job should execute if SIT-Job is stable )
+
+	> Create a "UAT_Job" Using "Free-sytle Project"
+
+	> General, Enter Description "UAT-Job"
+	
+	> Go to SCM, Select Git and Enter "Repo URL"
+	
+	> Build Trigger, Select "Build after other Project are build"
+		
+		> Project to watch " SIT_Job" 
+
+		> Select 'Tigger only if build is stable"
+
+	> Build Environment, Select "Delete work space before build starts"
+	
+	> Build Steps, Select "Invoke top-level Maven Targets" and Enter Goal "clean Package"
+	
+	> Post Build Action, Select "Deploy War/ear to container" and Give war file path "**/*.war"
+
+	> Context Path "UAT-Project-Web"
+
+		> Add Container "Tomcat 9.x"
+		
+		> Paste UAT-Tomcat Server URL : http://54.556.664.47:8080/
+
+	> Apply & Save.
+
+> Go to Jenkins Dashboard, we can see 3 Jobs Created.
+
+> Now we need to execute these jobs through a pipeline automatically.
+
+7. Create Jenkins Build Pipeline to Execute the jobs in jenkins.
+
+	> Install "Build Pipeline" plugin
+
+	> Go to Jenkins Dashboard, we can see new "+" icon, on top of jobs.
+
+	> Click on "+" icon, Enter Name "My-Pipeline" and Select "Build Pipeline View" and Click on "Create"
+
+	> Description "My Project pipeline"
+
+	> Build Pipeline View Title "My Pipeline-Project"
+
+	> Pipeline flow, Layout "Based On up/down stream relationship"
+
+	> Upstream/Downstream Config, Select initial Job "Dev_Job"
+
+	> Apply & Save.
+
+8. Go To Build Pipeline View
+
+	> Tigger pipeline, it will execute the dev_Job. now go and check in dev tomcat server. we can see application is deployed.
+
+	> Automatically, SIT and UAT jobs will be executed in sequence.
+
+9. Now, Modify the data in Git-Repo and automatically Job shold execute after 1min.
 
 
+Q) If we forgot Jenkins Password, then how to recover it ?
+
+> Go to /var/lib/jenkins/config.xml
+
+> Set value for useSecurity as false 
+	
+	Ex: <useSecurity> false </useSecuirty>
+
+> Re-start Jenkins & Try To Access.
+
+Q) How To change Jenkins Port Number?
+
+> Go to Root Directory
+
+> Go to ```/etc/sysconfig```
+
+> open jenkins file and Change Port Number ```sudo vi jenkins```
+
+> JENKINS_PORT="8080"
+
+> Restart Jenkins Server. 
+
+Q) How can we deploy code into server from a particular branch.
+
+> Using "Project is Parameterized"
+
+> Choice Paramter is if u want to enter branch names automatically.
+
+> String Parameter is if u want to enter branch names manually.
+
+Note: During Job Excution, we can select a particular branch and we can execute that branch only
+
+Job Parameterised-Task :
+=======================
+
+Q) Create a Job and Execute the job using "Job Parameterized"
+
+> Create a Job using Free-style project
+
+	> General, Select "this Project is Parameterized" and Add peramter "Choice Paramter"
+
+		> Name : BranchName 
+
+		> Choices : Enter Every Branch Name in nextline
+
+		> Description : BranchName
+
+	> SCM, Select Git and Enter Repo URL.
+
+		> Branches to Build :  */${BranchName}  #configure branch name dinamically.
+
+	> Build Trigger, Poll SCM " * * * * * "
+
+	> Build Environment, Select "Delete work space before build starts"
+
+	> Build Steps, Select "Invoke top-level Maven Targets" and Enter Goal "clean Package"
+
+	> Post Build Action, Select "Deploy War/ear to container" and Give war file path "**/*.war"
+
+	> Context Path "SIT-Project-Web"
+
+		> Add Container "Tomcat 9.x"
+
+		> Paste SIT-Tomcat Server URL : http://54.556.664.46:8080/
+
+	> Apply & Save.
+
+> Inside the Job, we can See "Build with Paramter" Option and Click it.
+
+	> Select the "Branch" Name and "Build" it 
+
+Note : If the selected branch is not available in Git repo, the Build will gets "Fail"
+
+> Go to Tomcat and check the Application
 
 
 
