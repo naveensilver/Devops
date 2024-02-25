@@ -1399,7 +1399,37 @@ Note: If you will not select this option, Jenkins Job will be excuted in Master 
 
 
 
+# BACK UP In Jenkins :
 
+In Jenkins, We will Back up the Build Job Info for further Purposes. 
+
+We Install "Thin Backup" Plugin. Used to Backup the deleted data in Main Server. We Create No. of Backupp Folder.
+
+Go To Jenkins Dashboard > Manage Jenkins > Manage Plugins > Available Plugins > Search "ThinBackup" and Install without Restart.
+
+Go To Dashboard > Manage Jenkins > Tools and Actions > ThinBackup > Go to Settings > ThinBackup Configurations 
+
+> Backup Directory : ```/opt/jenkins/backup```
+
+Note: Create a Backup folder and it should have Read, Write, Execute Permissions and also should have Jenkins:Jenkins (User:Group) Permissions.
+
+- To change permission we use ```chmod -R 777 jenkins``` 
+
+- To Change user:group Permissions ```chown jenkins:jenkins jenkins```
+
+- To Check List of users :  ```cat /etc/passwd```
+
+Go Back to ThinBackup Configurations
+
+> Backup schedule for full backups : 30 14 * * * (Cron Syntax)
+
+> Max num of backup sets: -1 
+
+> Backup Build Results : select all and Save.
+
+Now Go To Dashboard > Manage Jenkins > Tools and Actions > ThinBackup
+
+If you click on "Backup Now". Automatically Backup file will be created in Backup Directory.
 
 
 
