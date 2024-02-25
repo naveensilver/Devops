@@ -865,7 +865,7 @@ We will use 'Build Triggers' and We can schedule the job using 'cron' syntax.
 
 > Schedule " * * * * * " , means schedule the job every minute.
 
-## Jenkins Pipeline
+## Jenkins Pipeline Using Free style Project Job :
 
 The Sequence of jobs execution is called as "Pipeline".
 
