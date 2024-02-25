@@ -1397,9 +1397,7 @@ Note: If you will not select this option, Jenkins Job will be excuted in Master 
 ==========================================================================================
 
 
-
-
-# BACK UP In Jenkins :
+## BACK UP In Jenkins :
 
 In Jenkins, We will Back up the Build Job Info for further Purposes. 
 
@@ -1429,9 +1427,13 @@ Go Back to ThinBackup Configurations
 
 Now Go To Dashboard > Manage Jenkins > Tools and Actions > ThinBackup
 
-If you click on "Backup Now". Automatically Backup file will be created in Backup Directory.
+Click on "Backup Now". Automatically Backup file will be created in Backup Directory.
 
+Now, Go to ```/var/lib/jenkins```, delete any files and try to restore it.
 
+Go to ThinBackup > Click on "Restore". Select restore backup file and Restore.
+
+Check the files restored or not in ```/var/lib/jenkins```.
 
 
 
