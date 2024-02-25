@@ -193,7 +193,7 @@ Note : If we have error in our code then it will give feedback & it will be corr
   
   Using Plugins, Jenkins Automates the entire SDLC 
   
-  #### IMAGE ###
+  [IMAGE]
   
   By using single tool, we can intigrate and automate entire software development.
   
@@ -257,7 +257,7 @@ Note : If we have error in our code then it will give feedback & it will be corr
 
 Note : All the above build and deplyments tasks can be automated using Jenkins tool.
   
-  ### Jenkins Installation Set-Up :
+### Jenkins Installation Set-Up :
   
 1. Create an EC2 Instnace in Linux (Custom TCP + 8080 Port Enable) and Connect the instance.
   
@@ -372,7 +372,7 @@ We have types of jobs in Jenkins :
 5. Multibranch Pipeline 
 6. Organisation folder 
 	
-### Create Free-Style Project Job :
+# 1. Free-Style Project Job Creation :
 
 1. Go to Jenkins Dashboard 
 
@@ -1394,15 +1394,11 @@ Note: If you will not select this option, Jenkins Job will be excuted in Master 
 
  Note: Using Master and Slave, we can also execute in Master as well as slave server.
 
-
-
-
-
 ==========================
 
 ## BACK UP In Jenkins :
 
-Q) How to Backup Jenkins Server files In Jenkins.
+Q) How to take Backup Jenkins Server files In Jenkins.
 
 In Jenkins, We will Back up the Build Job Info for further Purposes. 
 
@@ -1440,11 +1436,6 @@ Go to ThinBackup > Click on "Restore". Select restore backup file and Restore.
 
 Check the files restored or not in ```/var/lib/jenkins```.
 
-
-================
-
-
-
 Q) How to Install Jenkins using File 
 
 Create ```vim jenkins.sh``` and store all Jenkins installation commands in this file.
@@ -1459,7 +1450,7 @@ check the jenkins server ```systemctl status jenkins```
 
 
 
-
+# 2. Pipeline Job :
 
 
 
@@ -1477,4 +1468,6 @@ URL : http://Ec2-IP : 8080/exit
 > Click 'Retry using post'
 
 > Shutting Down Automaticaly  
+
+
 
