@@ -1394,10 +1394,15 @@ Note: If you will not select this option, Jenkins Job will be excuted in Master 
 
  Note: Using Master and Slave, we can also execute in Master as well as slave server.
 
-==========================================================================================
 
+
+
+
+==========================
 
 ## BACK UP In Jenkins :
+
+Q) How to Backup Jenkins Server files In Jenkins.
 
 In Jenkins, We will Back up the Build Job Info for further Purposes. 
 
@@ -1436,10 +1441,21 @@ Go to ThinBackup > Click on "Restore". Select restore backup file and Restore.
 Check the files restored or not in ```/var/lib/jenkins```.
 
 
+================
 
 
 
+Q) How to Install Jenkins using File 
 
+Create ```vim jenkins.sh``` and store all Jenkins installation commands in this file.
+
+This file should have executable permissions : ```chmod +x jenkins.sh ```
+
+Now, Execute the file ```./jenkins.sh ```
+
+Jenkins will install automatically. 
+
+check the jenkins server ```systemctl status jenkins```
 
 
 
