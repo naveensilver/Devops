@@ -1034,10 +1034,11 @@ Steps to Configure Jobs and Execute Jobs In Sequences
 
 	> Automatically, SIT and UAT jobs will be executed in sequence.
 
-9. Now, Modify the data in Git-Repo and automatically Job shold execute after 1min.
-
+9. Now, Modify the data in Git-Repo and automatically Job should execute after 1min.
 
 Q) If we forgot Jenkins Password, then how to recover it ?
+
+First Stop Jenkins Server ```systemctl stop jenkins```
 
 > Go to /var/lib/jenkins/config.xml
 
@@ -1113,7 +1114,121 @@ Note : If the selected branch is not available in Git repo, the Build will gets 
 > Go to Tomcat and check the Application
 
 
+## Users & Roles in Jenkins
 
+In a Project, all the team members should have jenkins access.
+
+DevOps Team members will use jenkins to create jenkins jobs for build and deployment automation.
+
+Dev & Testing team member will use jenkins to run the jobs.
+
+Note : So, We can call jenkins is role based application.
+
+Exercise :
+----------
+Create 1 account for DevOps Team and Give all Permissions.
+
+Create 1 account for Dev team and Give only "Overall" read and "Job" Build permissions.
+
+Create 1 account for Test team and Give only "Overall" read and "Job" Build permissions.
+
+Create Users In jenkins
+------------------------
+
+1. Go to Manage Jenkins > security >> Manage users
+
+> Create User (Devops)
+
+	> username : devops_user
+	> password : 123
+	> confirm pwd : 123
+	> Devops
+	> silver@gmail.com
+	> Create User
+
+> Create user (Dev)
+
+	> username : dev_user
+	> password : 123
+	> confirm pwd : 123
+	> Developer
+	> dev@gmail.com
+	> Create User
+
+> Create user (Test)
+
+	> username : test_user
+	> password : 123
+	> confirm pwd : 123
+	> Tester
+	> test@gmail.com
+	> Create User
+
+2. Go to /var/lib/jenkins/users/users.xml file (you can see user accounts created)
+
+Note: Devops teams members should do all Operations activities in Jenkins where as Dev and test Teams have permissions to "only runs the job" in real time. so, we can configure permissions for users.
+
+3. Go to Manage Jenkins > Security >> Configure Global Security (User Permission)
+
+> Authentication
+
+	> Security Realm
+		> Jenkins own user database (Select)
+		> LDAP (Company specific-All the employe server details in LDAP server)
+
+	> Authorization 
+		> Project Based Matrix Autorization Strategy / Matrix Based Security / Role-Based Strategy
+
+Here, We can Manages Users Permission in Different Ways 
+
+Case-1) Using "Matrix Based Security". We will get User/Group Box and we can add Users/Groups directly.
+
+	> Click On Add user and user name "devops_user" 
+		> For Devops user, i will give Overall "Administer" Permissions.
+
+	> Click On Add user and user name "dev_user" 
+		> For Dev user, i will give Overall "Read" and Job "build and Read" Permissions.
+
+	> Click On Add user and user name "test_user" 
+		> For Test user, i will give Overall "Read" and Job "build and Read" Permissions.
+
+> Also we can add "Groups"
+
+Case-2) Using "Role-Based Strategy". 
+
+Go To Jenkins Dashboard > Manage Jenkins > System Configuration > Manage Plugins > Available Plugins 
+
+Search "Role-Based Authorization Strategy". Select and Install Without Restart.
+
+Now Create 3 User like DevOps_user, Dev_user, Test_User.
+
+Go to Dashboard > Manage Jenkins > Security 
+
+Then, We get a New Options "Manage and Assign Roles"
+
+> Manage and Assign Roles
+
+	> Go to Manage Roles 
+
+		- Role to add : DevOps_Role > Click on "Add" and Give Admin Permissions
+
+		- Role to add : Dev_Role > Click on "Add" and Give Perticular Permissions like Read all 
+
+		- Role to add : Test_Role > Click on "Add" and Give Particular Permissions
+
+		- Then Save.
+
+	> Assign Roles 
+		
+		- User/Group to add : DevOps_user and Click on "Add" and Select Global Role as "DevOps_Role"
+
+		- User/Group to add : Dev_user and Click on "Add" and Select Global Role as "Dev_Role"
+
+		- User/Group to add : Test_user and Click on "Add" and Select Global Role as "Test_Role" 
+		
+		- Then Save 
+
+Note: Log-out from Admin account and Log-in using Above DevOps, Dev, Test team Credentials.
 
 
 
