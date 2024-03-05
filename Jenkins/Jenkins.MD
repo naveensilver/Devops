@@ -727,6 +727,34 @@ Note: With Above Steps We have Created Jenkins Job
 >> Delete Build - Delete Build
 ```
 
+### Create a Free-Style Job to Get Code From GitHub Private Repo
+
+1. Go to Jenkins Dashboard > Enter Item Name > Freestyle project > ok
+
+- General :
+    - GitHub Project : [GitHub_Private_Repo_URL]
+
+- Source Code Management :
+    - Git : Repo URL : [GitHub_Private_Repo_URL]
+
+    Note : Make sure Git should be installed in your server.
+
+    - Credentials : + Add
+        - Kind : Username with Password 
+        - Username : naveensilver [Your_GitHub_userName]
+        - Password : Generate GitHub Token(ref.2) [Paste_GitHub_Token]
+    - Branches to Build : */master 
+
+    Note: Given Branch should Present in Github Repo
+
+    - Save and Build the Job 
+
+2. Steps To Generate GitHub Token 
+
+- In GitHub > Settings > Developer settings > Personal Access tokens > Token (classic)
+
+    - Generate New Token > Note: My-Jenkins-Token > Select Scopes: Repo > Generate Token > Copy Token 
+
 ## Build + Deployment Part :
 
 Q) How to do the deployment into Tomcat Server Using Jenkins ?
