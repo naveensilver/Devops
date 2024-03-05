@@ -420,9 +420,14 @@ We have types of jobs in Jenkins :
 ```
 	cd /var/lib/jenkins/workspace/
 ```
-   Here, We will get the output of Jenkins job.
 
-Note : For every minute jenkins job will execute.
+whenever you create and build a job. workspace folder will be created in Linux server as well as Jenkins server.
+
+- Linux server  ```cd /var/lib/Jenkins/workspace/job-1 ```
+
+- Jenkins server  dashboard > job > workspace > console output > history of Jenkins 
+
+   Here, We will get the output of Jenkins job.
 
 ### Components of Jenkins :
 
