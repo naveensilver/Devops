@@ -421,7 +421,7 @@ We have types of jobs in Jenkins :
 	cd /var/lib/jenkins/workspace/
 ```
 
-whenever you create and build a job. workspace folder will be created in Linux server as well as Jenkins server.
+Note : Whenever you create and build a job. workspace folder will be created in Linux server as well as Jenkins server.
 
 - Linux server  ```cd /var/lib/Jenkins/workspace/job-1 ```
 
