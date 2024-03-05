@@ -1485,6 +1485,1169 @@ check the jenkins server ```systemctl status jenkins```
 
 # 2. Pipeline Job :
 
+Jenkins Pipeline is a combination of plugins which automates no. of tasks and makes CI/CD pipeline effiecient, high in Quality and reliable.
+
+Jenkins pipeline is automation solution that let's you create simple or complex pipelines.
+
+A Pipeline is a group of stages interlinked with eachother in a sequence.
+
+Jenkins provides two ways of developing a pipeline
+
+1) Scripted 
+
+2) Declarative 
+
+Generally, Jenkins jobs were created using Jenkins UI called Jenkins Free-style jobs.
+
+In Jenkins 2.0, Jenkins introduced a way to create jobs using the technique called pipeline as code.
+
+In Pipeline as code technique, jobs are created using a script file that contains the steps to be executed by the job.
+
+In Jenkins, that scripted file is called Jenkinsfile.
+
+## What is Jenkinsfile
+
+Jenkinsfile is nothing but a sample text file which is used To write the Jenkins Pipeline and To automate the contineous integration process.
+
+Jenkinsfile is usually checked in along with the project source code in Git repo. Ideally, every application will have it's own Jenkinsfile.
+
+Jenkins can be written in two ways.
+
+1) Scripted Pipeline syntax
+2) Declarative Pipeline syntax 
+
+NEW ITEM > NAME > PIPELINE > SAVE 
+
+### 1. What is Scripted Pipeline ?
+
+Jenkins pipeline are generally written as scipted pipelines. ideally, the scripted pipelines stored in jenkins web UI as a Jenkinsfile.
+
+The end-to-end scripted pipeline script is written in Groovy.
+
+It requires knowledge of Groovy Programming as a pre-requisites.
+
+If you, use scripted pipeline, you need to know any programming language like Groovy, python.
+
+Jenkinsfile start with the word 'node'.
+
+It can contains standard programming constructs like if-else block, try-catch block etc.
+
+- Sample Scripted Pipeline 
+
+```
+node {
+    stage("Stage-1){
+        echo "hai"
+    }
+
+    stage("stage-2"){
+        echo "hello"
+    }
+}
+
+```
+### 2. What is Declarative Pipeline?
+
+The Declarative Pipeline sub-system in jenkins pipeline is relatively new, and provided a simplified, opinionated syntax on top the Pipeline subsystems.
+
+The latest addition in Jenkins Pipeline job creation technique.
+
+Jenkins declarative pipeline needs to use the predefined constructs to create pipelines. Hence it is not flexible as a scripted pipeline.
+
+Jenkinsfile starts with the word 'pipeline'
+
+Jenkins declarative pipeline should be the preferred way to create a jenkins job as they offer a rich set of features, come with less learning curve & no pre-requisite to learn a programming language like Groovy just for the sake of writting pipeline code.
+
+If you use declarative pipeline, you no need to know any programming language.
+
+We can also validate the syntax of the Declarative pipeline code before running the job. it helps to avoid a lot of run time issues with build script.
+
+### Declarative Pipeline Architecture : 
+<Image>
+
+Pipeline : Entire Declarative pipeline script should be written inside the pipeline block. It's a mandatory block.
+
+Agent : Specify where the jenkins build job should run. agent can be at pipeline level or stage level. it's mandatory to define an agent.
+
+Stages : Stages block contains diff executable stage blocks. at least one stage block is mandatory inside stages block.
+
+Stage : Stage block contains the actual execution steps. Stage block has to defined within stages block. it's mandatory to have at least one stage block inside the stages block. also its mandatory to name each stage block & this name will be Unique.
+
+Every stage block is having single steps block. inside steps block we will give commands or scripts.
+
+- Sample Declarative Pipeline
+
+```
+Pipeline {
+    agant any  // any means which server is available. In that server build the job
+    stages {
+        stage("Stage-1") {
+            steps {
+                echo 'Hello World'
+            }
+        }
+    }
+}
+
+```
+Q) Write a multi stage pipeline 
+
+```
+pipeline {
+    agent any
+    stages {
+        stage("code") {
+            steps {
+                echo "Code is done"
+            }
+        }
+        stage("build"){
+            steps{
+                echo "Build is done"
+            }
+        }
+        stage("test"){
+            steps{
+                echo "Test is done"
+            }
+        }
+        stage("deploy"){
+            steps{
+                echo "Deploy is done" // echo is used to print the text.
+            }
+        }
+    }
+}
+
+```
+Note : If any stage is failed and the next stage will be failed/stopped.
+
+Q) Write a pipeline to execute the commands.
+
+```
+Pipeline {
+    agant any  
+    stages {
+        stage("File") {
+            steps {
+                sh "touch myfile.txt" // sh is used to execute command
+                sh "date"  
+                sh "mkdir myfolder"
+            }                         // single 'sh' with multiple commands
+            steps {
+                sh '''
+                touch flm.png
+                mkdir folder
+                date 
+                cal
+                '''
+            }
+        }
+    }
+}
+
+```
+
+We can check the output in server "/var/lib/jenkins/workspace/[JobName]"
+
+Q) Write a pipeline to Execute the job in Dev-Slave node
+
+-- First Create 2 Ec2 Instances (MasterNode, SlaveNode)
+
+- Set Jenkins server in Master Node.
+
+- Install Jenkins Dependency(java) in Slave Node.
+
+- Set up an Agent(Slave Node) in Jenkins Dashboard 
+
+> Jenkins Dashboard > Setup an agent/Manage Nodes and Clouds
+
+    > New node name : node1 , type : Permanent Agent and Create
+
+    > Name : node1
+    > Description : This is for dev_slave
+    > Number of executers : 2
+    > Remote root directory : /home/ex2-user/jenkins/ 
+    > Labels : dev
+    > Usage : Only build jobs with label expressions matching this node
+    > Lunch Method : Lunch agent via SSH
+        > Host : Slave-Node_Private_IP
+        > Credentials : +Add 
+            > Add Credentials : 
+                > Kind : SSH Username with Private key
+                > Description : This is for Slave Node
+                > Username : ec2-user
+                > Private key : select "Enter directly" and paste .pem file data.
+            > Host key Verification strategy : Non Verifying Strategy
+            > Availability : keep this agent online as much as possible
+            > Save and node1 will be created
+
+Go to Dashboard > Job > Configure > Pipeline Script
+
+```
+Pipeline {
+    agant {
+        label 'dev'
+    }
+    stages {
+        stage("Stage-1") {
+            steps {
+                echo 'Hello World'
+            }
+        }
+    }
+}
+
+// Save and Build Job
+
+// Check Console output and Varify path in Dev-Slave node /home/ec2-user/jenkins/workspace/job-1
+
+```
+
+### Variables
+
+Variables are used to store the values (or) data. Here, we are having 2 types of variables.
+
+1. Global Variable
+
+- Here, we’re declaring the environment variable after the agent. 
+
+- We have to use $variable in stages to call the variables
+
+Q) Single Global Variabel Script
+
+```
+Pipeline {
+    agant any 
+
+    environment {
+        name = "Naveen Silver"
+    } 
+    stages {
+        stage("Stage-1") {
+            steps {
+                echo 'Hi, my name is $name'  // $ used to define variable
+            }
+        }
+    }
+}
+
+```
+Click on Build and click on logs to see the output.
+<Image>
+
+Q) Multiple Global Variable 
+
+```
+Pipeline {
+    agant any 
+
+    environment {
+        name = "Naveen Silver"
+        topic = "DevOps" 
+        platform = 'Linkdin'
+        Duration = 90
+
+    } 
+    stages {
+        stage("Stage-1") {
+            steps {
+                echo 'Hi, my name is $name, I'm learning $topic through $platform.'
+                echo 'and the Course duration is $duration days'
+            }
+        }
+    }
+}
+
+```
+Click on Build and click on logs to see the output.
+<Image>
+
+2. Local Variable
+
+- Local variable override the Global variable.
+
+- We’re declaring local variable inside the stages.
+
+```
+Pipeline {
+    agant any 
+
+    environment {
+        name = "Naveen Silver"
+    } 
+    stages {
+        stage("Global Variable") {
+            steps {
+                echo 'Hi, my name is $name'
+            }
+        }
+        stage ("Local Variable"){
+            environment {
+                name = "Naveen Thurkapally"
+            }
+            steps{
+                echo "Hi, i'm $name"
+            }
+        }
+    }
+}
+
+```
+Click on build and here we have 2 stages. First is global and second is local variable. Now, you can easily find out the difference between local and global.
+<Image>
+
+So, when we’re using local variable means, some specific/particular stage we need another value. On that case we’re using local.
+
+
+Pre-defined variables:
+----------------------
+
+    echo “$BUILD_ID” -  To know build counts
+
+    echo “$BUILD_URL” - To know build URL
+
+```printenv``` command is used to return all Pre-defined Variables.
+
+This is all about local and global variables.
+
+## PARAMETERS PIPELINE 
+
+Instead of manually selecting parameters, we can write the code in pipeline
+- For the first time build, Automatically selecting the parameters based on our code. 
+    - For the 1st build → code will executed
+
+- After 1st build, Go to configure and check the parameters selected (or) not and do 
+
+- For the second time build, click on build with parameters, we can see the output
+    - For the 2nd build → parameters executed
+
+- Here, Overall we have to build 2 times to see our output
+- We have to take parameters block after the agent
+
+Note: Whenever we're using Parameter we don't need to sue Environment Block.
+
+### String Parameter Pipeline 
+
+```
+pipeline {
+    agent any 
+
+    parameters {
+        string(name: "person", defaultValue:"Naveen", description: "my name is ")
+    }
+    stages {
+        stage("String Parameters"){
+            steps {
+                sh 'echo "Hi, My name is $person" '
+                // Another way  
+                sh 'echo Hi, My Name is "${person}" '
+            }
+        }
+    }
+}
+```
+This is our code, click on save and build. Here, our code will get executed.
+<Image>
+
+After the first time build, Automatically selecting the parameters based on our code.
+<Image>
+
+Click on build with parameters, you will get above image and now click on build.
+<Image>
+
+This is all about string parameters
+
+### Boolean Parameter Pipeline
+
+```
+pipeline {
+    agent any
+
+    parameters {
+        booleanParam(name:"db", defaultValue: "true", description: "")
+    }
+    stages {
+        stage ("Boolean Parameters"){
+            steps{
+                sh 'echo "Hi, This is Boolean Parameter" '
+            }
+        }
+    }
+}
+```
+This is our code, click on save and build. Here, our code will get executed
+<Image>
+
+After the first time build, Automatically selecting the parameters based on our code.
+<image>
+
+Click on build with parameters, you will get above image and now click on build
+
+In the above code We written defaultValue is true. So, db checkbox is enabled. if we write false it is disabled.
+<image>
+
+###  Choice Parameter Pipeline
+
+```
+pipeline {
+    agent any 
+
+    parameters {
+        choice(name: "file", choices:["Naveen", "Smiley","Cutie","Silver"], description: " My file is ")
+    }
+    stages {
+        stage("Choice Parameters"){
+            steps {
+                sh 'echo "touch $file" '
+            }
+        }
+    }
+}
+```
+This is our code, click on save and build. Here, our code will get executed
+<Image>
+
+After the first time build, Automatically selecting the parameters based on our code.
+<Image>
+
+Here, we select the file names based on our requirements
+
+Click on build with parameters, you will get above image and now click on build
+<Image>
+
+After build click on logs we can see the output
+
+TASK 
+====
+
+Q) Write a Pipeline Script for getting multiple branch code from Github Using Variables and Parameters.
+
+```
+pipeline {
+    agent any 
+
+    parameters {
+        choice(name: 'branch', choices:['master','main','azure','aws','gcp','mustafa','oracle'], description:'select the desired branch')
+    }
+    stages {
+        stage("Choice Parameters"){
+            steps {
+                git branch:"${branch}" , url: 'https://github.com/devops0014/one.git'
+            }
+        }
+    }
+}
+```
+
+Click on Save and Build with Parameters.
+<Image>
+
+Select any Branch and Build it and Check the output in Jenkins Server Jobs.
+<Image>
+
+Here, If you select other branch next time. this branch files will be stored. previous branch files will be erased. 
+<Image>
+
+In this Case we use "Multi Branch Pipeline"
+
+
+Pipeline Syntax / Pipeline Syntax Generater:
+---------------------------------------------
+
+Used to generate Pipeline syntax.
+
+After giving the requirement steps. it will generate the syntax.
+
+
+# WEBHOOKS (Pending)
+
+<Jenkins-7 Video FLM>
+
+
+## Post Build Actions / Functions Pipeline
+
+A Jenkins Post-build action is a task executed after the build has been completed
+- When you perform build, you won’t care about the build whether it is success(or) fail. Automatically, you want to build the particular stage 
+- On that case we’re using post build actions
+
+Here, we are having post conditions in jenkins
+
+1. Success
+2. Failure
+3. Always
+---
+1. Success 
+
+When the above stage build gets success means, then the post block will executed.
+
+```
+pipeline {
+    agent any
+    stages {
+        stage ('Stage-1'){
+            steps {
+                echo ' Post Build Actions'
+            }
+        }
+    }
+    post {
+        success {
+            echo " The Above Stage-1 is Success "
+        }
+    }
+}
+```
+Click on Save and Build
+<image>
+
+2. Failure
+
+When the above stage build gets failed means, then the post block will executed
+
+```
+pipeline {
+    agent any
+    stages {
+        stage ('Stage-1'){
+            steps {
+                eco 'Post Build Actions'   // h removed for stage failure
+            }
+        }
+    }
+    post {
+        failure {
+            echo " The Above Stage-1 is Failure "
+        }
+    }
+}
+
+```
+Click on Save and Build
+<image>
+
+3. Always
+
+When the above stage build either success (or) Failure. This post block don’t care it will always executed
+
+
+```
+pipeline {
+    agent any
+    stages {
+        stage ('Stage-1'){
+            steps {
+                echo 'This is Stage-1'
+            }
+        }
+        stage ('stage-2'){
+            steps {
+                eco 'This is Stage-2'
+            }
+        }
+    }
+    post {
+        always {
+            echo " The Above Stage-1 is Success always "
+        }
+    }
+}
+```
+Click on Save and Build
+<image>
+
+Q) Write a Pipeline Syntax For Multiple Post Build Action Condition ?
+
+```
+pipeline {
+    agent any 
+    stages {
+        stage ('stage-1') {
+            steps {
+                echo 'post build actions '
+            }
+        }
+    }
+    post {
+        success {
+            echo 'print stage-1 success'
+        }
+        failure {
+            echo "print if stage-1 is failure"
+        }
+        always {
+            echo "print always if stage-1 is fail or success"
+        }
+    }
+}
+
+```
+Click on Save and Build
+<image>
+
+This is all about Post-Build Actions
+
+
+
+
+### Custom WorkSpace - Pending
+
+<Time Laps 25min>
+
+### Parallel Stages
+
+```
+pipeline {
+    agent any
+    stages {
+        stage ("Stage-1"){
+            parallel {
+                stage("stage-2"){
+                    steps{
+                        echo "stage-2 is parallel to stage-1"
+                    }
+                }
+                stage("stage-3"){
+                    steps{
+                        echo "stage-3 is parallel to stage-1"
+                    }
+                }
+            }
+        }
+       
+    }
+}
+```
+Click on Save and Build
+<image>
+
+Basically the Build stages will build one after another but here, we can see Build stages done parallelly. i.e, when the stage-1 is build then automatically stage-2 and stage-3 gets build at a time.
+
+Q) What if any stage got failure ?
+
+```
+pipeline {
+    agent any
+    stages {
+        stage ("Stage-1"){
+            parallel {
+                stage("stage-2"){
+                    steps{
+                        eco "stage-2 is parallel to stage-1" // failure
+                    }
+                }
+                stage("stage-3"){
+                    steps{
+                        echo "stage-3 is parallel to stage-1"
+                    }
+                }
+            }
+        }
+       
+    }
+}
+```
+
+Click on Save and Build
+<image>
+
+In Parallel Stages, If the any stage gets fail, it will go for next stage.
+
+### Input Function Pipeline 
+
+It takes the input from the user, based on the input it will performs the operations.
+
+Here, we are taking the input from the user
+
+- If User said OK means build will happen
+- If User said NO means build will fail
+
+ So, here we are having one condition. That condition we can called input function
+
+- Here continuous integration performed. i/e, build +test
+
+- But when it comes to deploy stage. It has to be asked the input from the user
+
+Real-Time Scenario:
+
+- Whenever you’re doing deployment, this input function we have to give to approval manager. So, manager check everything. If everything is correct he will click OK i.e., he will approve the deployment
+ 
+- Here, how we’re giving the permissions means we’re using role based strategy and for all managers. we have to give full build perform permissions.
+
+```
+pipeline {
+    agent any 
+    stages{
+        stage("Input Function"){
+            steps{
+                sh 'echo "This will Print acc to Users input" '
+            }
+            input{
+                message " Are You sure ?"
+                ok "Yes"
+            }
+        }
+    }
+}
+```
+Click on save and build you will get below image.
+<image>
+
+Here, if we click on yes means build will success, Click on abort means build aborted/stopped.
+
+
+Once you click on yes,  you will get  below image.
+<image>
+
+This is all about input function
+
+Q) For Multiple User Permissions 
+
+```
+pipeline {
+    agent any
+    stages{
+        stage("stage-1"){
+            input {
+                message "Press Ok to Continue ?"
+                submitters "user1, user2"         // Not Mandatory 
+                parameters{
+                    string(name:"username", defaultValue: "user", description:" User Permission" )
+                }
+            }
+            steps {
+                echo "${username} said ok to me, so that i can build"
+            }
+        }
+    }
+}
+```
+Click on save and build you will get below image.
+<image>
+
+Select the Particular user for permission and Proceed.
+
+Note : This Job will success without "Submitter". which is used to Provide default users list.
+
+Task ON PARAMETERS
+-------------------
+
+Q) Input Parameter Using IF-ELSE Conditions.
+
+```
+pipeline {
+    agent any
+    parameters{
+        string(name: 'NAME', description: 'Please tell me your Name')
+        choice(name: 'GENDER', choices: ['Male', 'Female'], description: 'Choose Gender')
+    }
+    stages{
+        stage("Printing Name"){
+            steps {
+                script{
+                    def name = "${params.NAME}"
+                    def gender = "${params.GENDER}"
+                    if(gender=="Male"){
+                        echo "Mr. $name"
+                    }else{
+                        echo "Mrs. $name"
+                    }     
+                }
+            }
+        }
+    }
+}
+```
+Click on Save and Build with Parameters.
+<Image> <Jenkins-8 Video>
+
+# Master & Slave Connection Through SSH-KEYGEN
+<image>
+
+1. Launch 3 Instaces at a time using with key-pair
+
+- Here Name the 3 instances like Master, slave-1, slave-2 for better understanding.
+
+2. Connect Master server
+
+a) Set up Jenkins 
+
+- To See list of users ```cat /etc/passwd```
+
+b) Set Password to Jenkins User
+
+- To Set Password for users ```passwd <username>```
+
+c) Full Root Permission to Jenkins User
+
+- Go to ```visudo``` and Go to 100th line ``:100``
+
+- Add ```jenkins ALL=(ALL)      NOPASSWD: ALL``` it in 101 linw and Save it ``:wq``.
+
+d) Password Authentication 
+
+- Go to ```vi /etc/ssh/sshd_config```
+
+- Go to 63rd line ``63`` and Change it as ``PasswordAuthentication YES``
+
+e) Restart SSHD
+
+- To Restart sshd ``` systemctl restart sshd ```
+
+3. Connect Slave-1 server
+
+a) Add Jenkins user
+
+- To Create ``useradd jenkins``
+
+- To See list of users ```cat /etc/passwd```
+
+b) Set Password to Jenkins User
+
+- To Set Password for users ```passwd jenkins```
+
+c) Full Root Permission to Jenkins User
+
+- Go to ```visudo``` and Go to 100th line ``:100``
+
+- Add ```jenkins ALL=(ALL)      NOPASSWD: ALL``` it in 101 linw and Save it ``:wq``.
+
+d) Password Authentication 
+
+- Go to ```vi /etc/ssh/sshd_config```
+
+- Go to 63rd line ``63`` and Change it as ``PasswordAuthentication YES``
+
+e) Restart SSHD
+
+- To Restart sshd ``` systemctl restart sshd ```
+
+4. Connect Slave-2 server
+
+- Repeat the Slave-1 Configuration as it is.
+
+NOTE : We are connecting through SSH connection. So, we don't need to install Dependencies i.e, Java
+
+5. Establish Connection Between Master and Slave 
+
+a) Go To Master and Go inside jenkins user `` su - jenkins``
+
+- We can't go directly inside user. For that ``vi /etc/passwd`` go to last line using `G` and Change `false` to `bash` i.e, jenkins:/bin/bash
+
+- Now Go inside Jenkins user `su - jenkins`
+
+b) Generate SSH-key
+
+- To Generate key `ssh-keygen` [Click on triple enter]
+
+- Generated key saved in `/var/lib/jenkins/.ssh/id_rsa` (same like .pem file)
+
+- Go and Check `ls -al` and open `cd .ssh`
+
+c) Connecting to Slave 
+
+- To Connect Slave Server `ssh-copy-id jenkins@<Slave_Public_IP>`
+
+- If you give 'yes` and it will ask slave jenkins password 
+
+d) Loggin Into Slave Server in Master
+
+- Logging into slave server with `ssh jenkins@<Slave_Public_IP>`
+
+- Now we are in Slave server from Master. Here we can see `[jenkins@ip-<slave_Private_Ip> ~]$ `
+
+- Now, Perform some tasks here `$ touch files{1..5}`
+
+- Connect Slave server and Go to jenkins user `su - jenkins` and check files.
+
+- `exit` used to Exit from present user
+
+Same way we can connect with Multiple slave servers using SSH
+
+NOTE: Using SSH-Key we are connected to Slave MACHINE from MASTER MACHINE
+
+Architecture
+-------------
+
+```          
+           <<<<<<<<<<<< Slave-1
+          /   ssh
+Master   /<<<<<<<<<<<<< Slave-2
+         \    ssh
+           <<<<<<<<<<<< Slave-3
+```
+
+Here, we are Connected other slave servers with Master by generating ssh-key in Master.
+
+Task :
+------
+
+Q) Establish a connection b/w Slave-1 to Other servers
+
+- Connecting other servers with Slave-1.
+
+- For that, We have to generate a ssh-keygen in slave-1
+
+- Connect ssh-key with other servers
+
+Q) How to Disconnect SSH-KEY Connection
+
+- Go to `cd /var/lib/jenkins/.ssh/`
+
+- Here, we can see authorised_keys, id_rsa, id_rsa_pub, known_hosts
+
+- Remove files.
+
+
+# Master & Slave Connection (Key-Pair)
+
+
+Tasks On Pipeline Job
+--------------------
+
+Q) Maven Build Pipeline Script
+
+```
+pipeline {
+    agent any
+    environment {
+        PATH = "$PATH:/opt/apache-maven-3.9.1/bin"
+    }
+    stages {
+        stage('Get Code') {
+            steps {
+		git branch : 'main',
+                 url : 'https://github.com/ashokitschool/maven-web-app.git'
+            }
+        }
+        stage ('Build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+    }
+}
+```
+
+
+Q) JENKINS PIPELINE (JENKINS + MAVEN + GIT HUB + SONAR + TOMCAT)
+
+Create 3 Ec2 Instances 
+
+	>> Jenkins with .pem file 
+
+		>> Connect Instance and start the server 
+
+		>> Connect the Jenkins Dashboard using 8080
+
+	>> Tomcat Server
+
+		>> Connect Instance and start the server 
+
+		>> Connect the Tomcat Dashboard using 8080 (Change the port if you want)
+		
+	>> SonarQube Server
+
+		>> Connect Instance and start the server 
+
+		>> Connect the SonarQube Dashboard using 9000 
+
+Note: Install 'SSH Agent Plugin' and Generate code using "Pipeline Syntax" 
+
+    > Now Create a Job In Jenkins Dashboard 
+
+    > Go To Pipeline and Click on "Pipeline Syntax"
+		
+	> Go to Snippet Generator
+
+	> Steps > Simple step > Select "sshagent: SSH-Agent" Option
+
+		>> sshagent : ec2-user (default)
+
+			>> click on 'Add' and Add Credentials using SSH Username with Private Key (Jenkins VM .pem)
+
+			>> ID : Tomcat-Server-Agent 
+
+			>> Description : Tomcat-Server-Agent Credentials
+
+			>> Username : ec2-user
+
+			>> Private Key > .pem file > Add 
+
+		>> sshagent : add created agent i.e ec2-user(Tomcat-Server-Agent)
+
+		>> Click on Generate Script  (it will generate the script)
+
+```
+sshagent(['Tomcat-Server-Agent']) {
+	//some block 
+	sh 'scp -o StrictHostKeyChecking=no target/01-maven-web-app.war ec2-user@<Tomcat_Public_IP>:/home/ec2-user/apache-tomcat-9.0.63/webapps'
+}
+
+```		
+
+Q) why we are using ssh-agent in pipeline script ?
+
+Basically ssh is used for Communication between two machines 
+
+here, ssh-agent is used to connect jenkins server to tomcat server and to copy the war file from jenkins server to tomcat server.
+
+
+```
+pipeline {
+    agent any
+    environment {
+        PATH = "$PATH:/opt/apache-maven-3.9.1/bin"
+    }
+    stages {
+        stage('Get Code') {
+            steps {
+                git 'https://github.com/ashokitschool/maven-web-app.git'
+            }
+        }
+        stage ('Build') {
+            steps{
+                sh 'mvn clean package'
+            }
+        }
+        stage ('SonarQube Analysis') {
+	// def scannerHome=tool 'SonarScanner 4.0';
+            steps {
+                withSonarQubeEnv('Sonar-Server-7.8') {
+	// if you have configured more than one global server connection, you can specify it's name 
+		// sh "${scannerHome}/bin/sonar-scanner"
+                    sh 'mvn sonar:sonar'
+                }
+            }
+        }
+        stage ('Code Deploy') {
+            steps {
+                sshagent(['Tomcat-Server-Agent']) { 
+		// ssh agent - establish connection between 2 vm's
+                    sh 'scp -o StrictHostKeyChecking=no target/01-maven-web-app.war ec2-user@<Tomcat_Public_IP>:/home/ec2-user/apache-tomcat-3.9.1/webapps'
+                    // using ssh agent copying war file from Jenkins server to Tomcat Server
+                }
+            }
+        }
+    }
+}
+
+```
+Now, Execute the Job 
+
+Check Job Console output in Jenkins. we can find the job executed location.
+	path: /var/lib/jenkins/workspace/<jenkins_job> (target folder available)
+
+Check the output in Tomcat Server 
+
+Successfully Application deployed in server
+
+
+Task 
+----
+
+Q) Change the code in Git Hub and Execute the Job 
+
+Go to GitHub ``` 'https://github.com/ashokitschool/maven-web-app.git' ```
+
+Make some changes in Git Repo and Execute Job.
+
+Go To SonarQube and Check the Bug Report
+
+Go To Tomcat Server and Check the Deployement Output.
+
+Q) How To Deploy Project to Multiple Environments Using Script Pipeline ?
+
+We can Deploy our Project to Multiple environment. 
+
+For Every Environment, we need to write one stage Script
+
+For suppose you want deploy the Application to 'SIT' Environment.
+
+First Create SSH-Agent For SIT server and Copy war file to SIT Server
+
+```
+ stage ('Code Deploy In SIT Server') {
+            steps {
+                sshagent(['Tomcat-SIT-Server-Agent']) { 
+
+		sh 'scp -o StrictHostKeyChecking=no target/01-maven-web-app.war ec2-user@<SIT_Tomcat_Public_IP>:/home/ec2-user/apache-tomcat-3.9.1/webapps'
+		}
+
+```
+
+Q) Write a script lines for getting code from GitHub Particular Branch 
+
+```
+steps {
+	git branch: 'main', url: <Git-Repo-URL>
+```
+
+## Email Notifications In Jenkins :
+
+We can configure Email notifications in Jenkins 
+
+With this option we can send email notification to team members after job execution completed.
+
+We need to configure SMTP properties to send emails.
+
+Note : Install 'Email Extentions Plugin' 
+
+> Go to Manage Jenkins > Configure System
+
+> Go to 'Extended E-mail Notification'
+
+> we will add company SMTP server Details 
+
+    > SMTP Server : smtp.gmail.com
+
+    > SMTP Port : 587
+
+    > Add Credentials > Username : GMail and Password : Gmail Pwd (Used for Authentication Purpose) - Select SSL/TLS
+
+Note: For Practice, we can use Gmail SMTP properties.
+
+Once SMTP properties added then we can configure email notification as 'Post Build Action' in Jenkins Free-Style Job
+
+In Pipeline Script we can configure the email notificationusing below script 
+
+```
+pipeline {
+    agent any
+    stages {
+        stage('Hello') {
+            steps {
+				echo "Hello Babess.."
+			}
+		}
+	}
+	post {
+		always {
+			mail to : "silver@gmail.com",
+			subject : "Test Mail"
+			body : "Test"
+		}
+	}
+}
+
+```
+
+
+
+# MULTI-BRANCH PIPELINE [PENDING]
+
+<Jenkins-9 Video>
+
+
+In Github, If we have Multiple branches and want to build multiple branches at a time.
+
+Jenkins file is Mandatory in Each-Branch
+
+ 
+A Multibranch job is a simply a Folder of Pipeline Jobs. For every branch you have, Jenkins will create a folder. So instead of creating a pipeline job for each of branches you have a git repo. You could use a multibranch job. this means that you'll have to create only one Job.
+
+
+
 
 
 
