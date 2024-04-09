@@ -24,6 +24,7 @@ pwd
 5. Explain is diff b/w relative and absolute path ?
 
 Relative path : Start from current working directory 
+
 Absolute path : The full path to a file or directory.
 
 6. Which command to be used to create a file in Linux ?
