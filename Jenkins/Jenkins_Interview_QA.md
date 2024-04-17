@@ -324,3 +324,89 @@ In this example:
 - You can add deployment steps, such as publishing artifacts to a repository or deploying to environments, within the `Versioning and Release` stage.
 
 Adjust the script and stages as per your project's versioning strategy, release process, and deployment requirements. Ensure that Git credentials and Maven configurations are set up in your Jenkins environment for seamless execution.
+
+
+
+
+`7. How do you handle Env variable and secrets security in jenkins CI/CD realtime hands on ?`
+
+Handling environment variables and secrets securely in Jenkins CI/CD pipelines involves using best practices such as storing sensitive information in Jenkins Credentials, utilizing environment-specific variables, and restricting access to sensitive data. Here’s a hands-on guide to managing environment variables and secrets securely in Jenkins:
+
+### 1. Using Jenkins Credentials
+
+1. **Add Credentials**:
+   - In Jenkins, go to "Manage Jenkins" > "Manage Credentials" > "Jenkins" (or "Global") > "Add Credentials".
+   - Choose the credential type appropriate for your use case (e.g., Username with password, Secret text, SSH Username with private key) and provide the required information.
+   - For sensitive data like passwords and API tokens, use the "Secret text" or "Username with password" credential types.
+
+2. **Access Credentials in Pipeline**:
+   - Use the `withCredentials` block in your Jenkins pipeline to securely access credentials.
+   - Example:
+     ```groovy
+     pipeline {
+         agent any
+
+         environment {
+             MY_SECRET = credentials('my-credential-id')
+         }
+
+         stages {
+             stage('Deploy') {
+                 steps {
+                     withCredentials([usernamePassword(credentialsId: 'my-credential-id', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                         sh "echo $USERNAME"
+                         sh "echo $PASSWORD"
+                         // Use credentials securely in commands or scripts
+                     }
+                 }
+             }
+         }
+     }
+     ```
+
+### 2. Using Environment Variables
+
+1. **Define Environment Variables**:
+   - Use Jenkins environment variables to store non-sensitive configuration values.
+   - Define environment variables at the pipeline level or using Jenkins configuration.
+
+2. **Access Environment Variables**:
+   - Access environment variables using the `env` object in your pipeline.
+   - Example:
+     ```groovy
+     pipeline {
+         agent any
+
+         environment {
+             MY_ENV_VARIABLE = 'some-value'
+         }
+
+         stages {
+             stage('Build') {
+                 steps {
+                     sh "echo $MY_ENV_VARIABLE"
+                 }
+             }
+         }
+     }
+     ```
+
+### 3. Restricting Access and Permissions
+
+1. **Role-Based Access Control (RBAC)**:
+   - Use Jenkins RBAC to define roles and permissions for users and groups.
+   - Restrict access to sensitive credentials and environment variables based on roles.
+
+2. **Plugin Security**:
+   - Use security plugins like Credentials Binding Plugin to securely inject credentials into your pipeline.
+   - Regularly update Jenkins and plugins to the latest versions to ensure security patches and improvements.
+
+### 4. Secrets Management Tools
+
+1. **External Secrets Management**:
+   - Integrate Jenkins with external secrets management tools (e.g., HashiCorp Vault, AWS Secrets Manager) for managing sensitive data centrally.
+
+2. **Secrets Encryption**:
+   - Encrypt sensitive data in configuration files or versioned repositories using encryption tools or plugins.
+
+By following these practices, you can handle environment variables and secrets securely in Jenkins CI/CD pipelines, reducing the risk of unauthorized access and ensuring sensitive data remains protected throughout your software delivery process. Adjust the examples and configurations based on your specific security requirements and tools in use.
