@@ -554,3 +554,112 @@ This pipeline consists of the following stages:
 5. **Post**: Gracefully shuts down Tomcat after pipeline execution.
 
 Adjust the paths, commands, and configurations (like Tomcat port or context path) according to your specific setup. Make sure that the Jenkins environment has necessary permissions to access Tomcat and execute commands. Additionally, consider enhancing the smoke test with more comprehensive tests based on your application's functionality.
+
+
+
+`9. What are the different stages in Jenkins pipeline for Java application ? Real time?`
+
+In a Jenkins pipeline for a Java application, there are several stages commonly included to automate the build, test, and deployment processes. Here are the different stages typically used in a Jenkins pipeline for a Java application in real-time scenarios:
+
+1. **Checkout SCM**:
+   - **Purpose**: Fetch the source code from the version control system (e.g., Git).
+   - **Steps**:
+     - Use Git plugin or `git` command to clone the repository or checkout the code.
+
+2. **Build**:
+   - **Purpose**: Compile the Java code and package the application.
+   - **Steps**:
+     - Use Maven (`mvn`), Gradle (`gradle`), or Ant (`ant`) to build the application.
+     - Example (Maven):
+       ```groovy
+       stage('Build') {
+           steps {
+               sh 'mvn clean package'
+           }
+       }
+       ```
+
+3. **Unit Testing**:
+   - **Purpose**: Execute unit tests to validate code functionality at a granular level.
+   - **Steps**:
+     - Use testing frameworks like JUnit, TestNG, or Mockito to run unit tests.
+     - Example:
+       ```groovy
+       stage('Unit Test') {
+           steps {
+               sh 'mvn test'
+           }
+       }
+       ```
+
+4. **Static Code Analysis**:
+   - **Purpose**: Analyze code for potential bugs, code smells, and maintainability issues.
+   - **Steps**:
+     - Use static code analysis tools like SonarQube, FindBugs, or Checkstyle.
+     - Example:
+       ```groovy
+       stage('Static Code Analysis') {
+           steps {
+               sh 'mvn sonar:sonar'
+           }
+       }
+       ```
+
+5. **Integration Testing**:
+   - **Purpose**: Test the integration of components/modules within the application.
+   - **Steps**:
+     - Use testing frameworks or tools for integration testing.
+     - Example:
+       ```groovy
+       stage('Integration Test') {
+           steps {
+               sh 'mvn verify'
+           }
+       }
+       ```
+
+6. **Artifact Archiving**:
+   - **Purpose**: Archive built artifacts for deployment and future reference.
+   - **Steps**:
+     - Use Jenkins `archiveArtifacts` or `stash` for archiving artifacts.
+     - Example:
+       ```groovy
+       post {
+           success {
+               archiveArtifacts 'target/*.jar'
+           }
+       }
+       ```
+
+7. **Deployment**:
+   - **Purpose**: Deploy the application to target environments (e.g., development, staging, production).
+   - **Steps**:
+     - Use deployment tools (e.g., Docker, Kubernetes, Ansible) or scripts to deploy the application.
+     - Example (Deploying to Tomcat):
+       ```groovy
+       stage('Deploy') {
+           steps {
+               sh 'cp target/*.war /path/to/tomcat/webapps'
+           }
+       }
+       ```
+
+8. **Post-Build Steps**:
+   - **Purpose**: Perform cleanup, notifications, or additional actions after the build and deployment.
+   - **Steps**:
+     - Include cleanup tasks, notifications (Slack, Email), or triggering downstream jobs.
+     - Example:
+       ```groovy
+       post {
+           success {
+               echo 'Build and deployment successful!'
+           }
+           failure {
+               echo 'Build or deployment failed!'
+           }
+       }
+       ```
+
+These stages provide a structured approach to automate the CI/CD pipeline for Java applications in Jenkins, covering build, test, analysis, deployment, and post-build tasks. Customize the stages and steps based on your project's requirements, testing frameworks, deployment targets, and integration tools.
+
+
