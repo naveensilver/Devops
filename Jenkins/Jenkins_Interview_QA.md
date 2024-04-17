@@ -663,3 +663,57 @@ In a Jenkins pipeline for a Java application, there are several stages commonly 
 These stages provide a structured approach to automate the CI/CD pipeline for Java applications in Jenkins, covering build, test, analysis, deployment, and post-build tasks. Customize the stages and steps based on your project's requirements, testing frameworks, deployment targets, and integration tools.
 
 
+`How to integrate Git with Jenkins in real time ?`
+
+Integrating Git with Jenkins allows for automated triggering of Jenkins jobs (such as builds, tests, and deployments) based on changes in your Git repositories. Here's a step-by-step guide to integrate Git with Jenkins in real-time:
+
+### 1. Prerequisites
+- Ensure you have Jenkins installed and running.
+- Have a Git repository (e.g., GitHub, GitLab, Bitbucket) where your project's source code is hosted.
+
+### 2. Install Required Plugins
+- Open Jenkins and navigate to `Manage Jenkins` > `Manage Plugins`.
+- Go to the `Available` tab and search for and install the following plugins:
+  - **Git Plugin**: Allows Jenkins to integrate with Git repositories.
+  - **Credentials Plugin**: Enables storing and managing credentials securely in Jenkins.
+
+### 3. Configure Global Git Settings in Jenkins
+- Go to `Manage Jenkins` > `Configure System`.
+- Scroll down to the `Git` section:
+  - Set the path to the Git executable (`git` command).
+  - Optionally, configure additional settings like user.name and user.email.
+
+### 4. Add Git Credentials to Jenkins
+- Go to `Manage Jenkins` > `Manage Credentials`.
+- Click on `(global)` or a specific domain where you want to add credentials.
+- Click on `Add Credentials` and choose the appropriate credential type (Username with password, SSH key, etc.).
+- Enter your Git credentials (username/password or SSH key) and save.
+
+### 5. Create a New Jenkins Job
+- Click on `New Item` in the Jenkins dashboard to create a new Jenkins job (freestyle or pipeline).
+- Enter a job name, choose the appropriate job type, and click `OK`.
+
+### 6. Configure Git SCM
+#### For Freestyle Jobs:
+1. In the job configuration page, under `Source Code Management`, select `Git`.
+2. Enter the Repository URL (HTTPS or SSH) of your Git repository.
+3. Choose the appropriate credentials from the dropdown.
+4. Optionally, specify the Branches to build or leave it blank to build all branches.
+
+#### For Pipeline Jobs (Jenkinsfile):
+1. Define a Jenkinsfile in your Git repository to describe your pipeline stages.
+2. In the job configuration page, select `Pipeline script from SCM`.
+3. Choose Git as the SCM, enter the Repository URL, and select the appropriate credentials.
+4. Specify the Path to your Jenkinsfile within the repository.
+
+### 7. Save and Run the Jenkins Job
+- Save your job configuration.
+- Click on `Build Now` to trigger a build manually or wait for changes in your Git repository to trigger Jenkins automatically (if configured).
+
+### 8. Configure Webhooks (Optional)
+- For automatic triggering of Jenkins jobs on Git commits, configure webhooks in your Git repository settings.
+- Set the webhook URL to `<Jenkins_URL>/github-webhook/` (for GitHub) or `<Jenkins_URL>/gitlab-webhook/post` (for GitLab).
+
+By following these steps, you'll integrate Git with Jenkins, allowing Jenkins to automatically build, test, and deploy your projects based on changes in your Git repositories. Adjust configurations based on your specific Git hosting platform and project requirements.
+
+
