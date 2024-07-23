@@ -127,3 +127,155 @@ Kubernetes supports several deployment strategies, including Rolling Update, Rec
 
 4. **Canary Deployment:**
    Gradually shifts a small percentage of traffic to the new version while monitoring for any issues before rolling it out to all users.
+
+=================================
+
+### Question 1: Difference between NAT instance and NAT gateway
+
+**Answer:**
+A NAT instance and a NAT gateway both enable instances in a private subnet to connect to the internet or other AWS services but have differences in terms of management, scalability, and availability.
+
+- **NAT Instance:**
+  - **Management:** Manually managed, requiring configuration and maintenance.
+  - **Scalability:** Limited by the instance type; requires manual intervention to scale.
+  - **Availability:** Not highly available by default; you must configure an Auto Scaling group and multiple instances for high availability.
+  - **Cost:** Generally cheaper but with added management overhead.
+
+- **NAT Gateway:**
+  - **Management:** Fully managed by AWS, no need for manual configuration.
+  - **Scalability:** Automatically scales to handle traffic.
+  - **Availability:** Highly available and redundant within an Availability Zone.
+  - **Cost:** Higher cost due to management and high availability features.
+
+### Question 2: Can we attach EBS to a running EC2 instance?
+
+**Answer:**
+Yes, you can attach an Elastic Block Store (EBS) volume to a running EC2 instance. 
+
+**Example:**
+1. **Create an EBS volume:**
+   ```bash
+   aws ec2 create-volume --size 10 --region us-west-2 --availability-zone us-west-2a --volume-type gp2
+   ```
+
+2. **Attach the EBS volume to an EC2 instance:**
+   ```bash
+   aws ec2 attach-volume --volume-id vol-xxxxxxxx --instance-id i-xxxxxxxx --device /dev/sdf
+   ```
+
+3. **Mount the volume on the instance:**
+   ```bash
+   sudo mount /dev/xvdf /mnt
+   ```
+
+### Question 3: How to manage the cost of AWS resources?
+
+**Answer:**
+Managing AWS costs involves using various tools and strategies to monitor, control, and optimize spending.
+
+**Example:**
+1. **Use AWS Cost Explorer:**
+   - Visualize, understand, and manage your AWS costs and usage over time.
+
+2. **Set Budgets and Alarms:**
+   - Use AWS Budgets to set custom cost and usage budgets.
+   - Set up alarms to notify you when your usage exceeds the set threshold.
+
+3. **Right-sizing and Optimization:**
+   - Regularly review and optimize your resources (e.g., downsizing EC2 instances, using Reserved Instances and Savings Plans).
+   - Implement Auto Scaling to match capacity with demand.
+
+4. **Use Cost Allocation Tags:**
+   - Tag resources to track and allocate costs across projects or departments.
+
+### Question 4: What are different instructions in Dockerfile?
+
+**Answer:**
+A Dockerfile contains a set of instructions to build a Docker image. Some common instructions include:
+
+- **FROM:** Specifies the base image.
+  ```dockerfile
+  FROM ubuntu:20.04
+  ```
+
+- **RUN:** Executes commands in the container.
+  ```dockerfile
+  RUN apt-get update && apt-get install -y python3
+  ```
+
+- **COPY:** Copies files from the host to the container.
+  ```dockerfile
+  COPY . /app
+  ```
+
+- **CMD:** Specifies the default command to run when the container starts.
+  ```dockerfile
+  CMD ["python3", "app.py"]
+  ```
+
+- **ENTRYPOINT:** Sets the default application to run inside the container.
+  ```dockerfile
+  ENTRYPOINT ["python3", "app.py"]
+  ```
+
+- **ENV:** Sets environment variables.
+  ```dockerfile
+  ENV APP_ENV=production
+  ```
+
+- **EXPOSE:** Exposes a port.
+  ```dockerfile
+  EXPOSE 80
+  ```
+
+### Question 5: How to change the default port in Jenkins?
+
+**Answer:**
+To change the default port in Jenkins, you need to modify the Jenkins configuration file.
+
+**Example:**
+1. **Edit the Jenkins configuration file:**
+   ```bash
+   sudo nano /etc/default/jenkins
+   ```
+
+2. **Update the HTTP_PORT variable:**
+   ```bash
+   HTTP_PORT=8081
+   ```
+
+3. **Restart Jenkins to apply the changes:**
+   ```bash
+   sudo systemctl restart jenkins
+   ```
+
+### Question 6: Can we change the location of logs in a Docker container?
+
+**Answer:**
+Yes, you can change the location of logs in a Docker container by configuring the logging driver and options in the Docker daemon or container.
+
+**Example:**
+1. **Configure the logging driver in the Docker daemon:**
+   Edit the Docker daemon configuration file (e.g., `/etc/docker/daemon.json`) to set a different logging driver and options.
+   ```json
+   {
+     "log-driver": "json-file",
+     "log-opts": {
+       "max-size": "10m",
+       "max-file": "3",
+       "path": "/var/log/docker/"
+     }
+   }
+   ```
+
+2. **Restart the Docker daemon:**
+   ```bash
+   sudo systemctl restart docker
+   ```
+
+3. **Specify logging options for a container:**
+   ```bash
+   docker run --log-driver json-file --log-opt path=/var/log/docker/ -d myapp
+   ```
+
+============================
