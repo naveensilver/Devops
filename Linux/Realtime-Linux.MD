@@ -94,5 +94,80 @@
   - **Command:** `rsync -avz /source/ user@remote:/destination/`
   - **Example:** Sync `/source/` directory to a remote destination.
 
+### 6. User Management
 
+- **`useradd`**
+  - **Use Case:** Create a new user.
+  - **Command:** `sudo useradd -m -s /bin/bash newuser`
+  - **Example:** Create a new user `newuser` with a home directory and bash shell.
+  
+- **`usermod`**
+  - **Use Case:** Modify a user account.
+  - **Command:** `sudo usermod -aG sudo newuser`
+  - **Example:** Add `newuser` to the sudo group.
+  
+- **`passwd`**
+  - **Use Case:** Change user password.
+  - **Command:** `sudo passwd newuser`
+  - **Example:** Set or update the password for `newuser`.
+
+### 7. Security and Permissions
+
+- **`chmod`**
+  - **Use Case:** Change file mode bits.
+  - **Command:** `chmod 755 script.sh`
+  - **Example:** Set read, write, and execute permissions for the owner, and read and execute permissions for others.
+  
+- **`chown`**
+  - **Use Case:** Change file owner and group.
+  - **Command:** `chown user:group file.txt`
+  - **Example:** Change the owner of `file.txt` to `user` and the group to `group`.
+  
+- **`ufw`**
+  - **Use Case:** Uncomplicated Firewall, a frontend for managing firewall rules.
+  - **Command:** `sudo ufw allow 22`
+  - **Example:** Allow SSH traffic through the firewall.
+
+### 8. Package Management
+
+- **`apt`**
+  - **Use Case:** Manage packages on Debian-based systems.
+  - **Command:** `sudo apt update && sudo apt upgrade -y`
+  - **Example:** Update package lists and upgrade all packages.
+  
+- **`yum`**
+  - **Use Case:** Manage packages on Red Hat-based systems.
+  - **Command:** `sudo yum update`
+  - **Example:** Update all packages to the latest version.
+  
+- **`snap`**
+  - **Use Case:** Install and manage snaps (universal Linux packages).
+  - **Command:** `sudo snap install vlc`
+  - **Example:** Install VLC media player as a snap package.
+
+### 9. Automation and Scripting
+
+- **`crontab`**
+  - **Use Case:** Schedule periodic tasks.
+  - **Command:** `crontab -e`
+  - **Example:** Edit the crontab file to schedule tasks.
+  
+- **`ansible`**
+  - **Use Case:** Automate configuration management, application deployment, and task automation.
+  - **Command:** `ansible-playbook site.yml -i inventory`
+  - **Example:** Run an Ansible playbook with the specified inventory file.
+
+### 10. Docker and Kubernetes
+
+- **`docker`**
+  - **Use Case:** Manage Docker containers.
+  - **Command:** `docker ps -a`
+  - **Example:** List all containers (running and stopped).
+  
+- **`kubectl`**
+  - **Use Case:** Control Kubernetes clusters.
+  - **Command:** `kubectl get pods`
+  - **Example:** List all pods in the current namespace.
+
+---
 
