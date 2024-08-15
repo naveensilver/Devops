@@ -764,3 +764,109 @@ If you encounter issues:
 - **Permissions:** Ensure you have the necessary permissions for directory access and file operations.
 
 By following these steps, you should have Apache Maven installed and configured on your WSL 2 Ubuntu environment. Maven will help you manage your Java projects and their dependencies effectively.
+
+## Install Jenkins on Ubuntu WSL2
+
+To install Jenkins on Ubuntu running within WSL 2 (Windows Subsystem for Linux 2), follow these steps. Jenkins is an open-source automation server used for continuous integration and continuous delivery (CI/CD).
+
+### **1. Update Your Package List**
+
+Start by updating your package list to ensure you have the latest information about available packages:
+
+```bash
+sudo apt update
+```
+
+### **2. Install Required Dependencies**
+
+Install necessary dependencies:
+
+```bash
+sudo apt install -y openjdk-11-jdk
+```
+
+Jenkins requires Java, and OpenJDK 11 is a commonly used version. You can use other versions if needed, but make sure they are compatible with Jenkins.
+
+### **3. Add the Jenkins Repository**
+
+1. **Add Jenkins' Key and Repository:**
+
+   ```bash
+   curl -fsSL https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -
+   ```
+
+   Add the Jenkins repository to your system:
+
+   ```bash
+   sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary > /etc/apt/sources.list.d/jenkins.list'
+   ```
+
+### **4. Install Jenkins**
+
+1. **Update the Package List Again:**
+
+   ```bash
+   sudo apt update
+   ```
+
+2. **Install Jenkins:**
+
+   ```bash
+   sudo apt install -y jenkins
+   ```
+
+### **5. Start and Enable Jenkins**
+
+Start Jenkins and enable it to start on boot:
+
+```bash
+sudo systemctl start jenkins
+sudo systemctl enable jenkins
+```
+
+### **6. Access Jenkins**
+
+1. **Find the Initial Admin Password:**
+
+   Jenkins generates an initial admin password during installation. Retrieve it using:
+
+   ```bash
+   sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+   ```
+
+2. **Open Jenkins in Your Browser:**
+
+   Jenkins runs on port 8080 by default. Open a browser and navigate to `http://localhost:8080` to access the Jenkins web interface.
+
+3. **Complete the Setup:**
+
+   - Enter the initial admin password you retrieved.
+   - Follow the setup wizard to install suggested plugins or select specific ones.
+   - Create the first admin user.
+
+### **7. Configure Jenkins**
+
+Once Jenkins is installed and running, you can configure it through the web interface:
+
+- **Manage Jenkins:** Configure system settings, install additional plugins, and set up your Jenkins environment.
+- **Create Jobs/Pipelines:** Start creating jobs and pipelines for CI/CD.
+
+### **Troubleshooting**
+
+If you encounter issues:
+
+- **Check Jenkins Logs:** View logs to diagnose issues:
+
+  ```bash
+  sudo journalctl -u jenkins
+  ```
+
+- **Verify Java Installation:** Ensure that Java is installed and configured correctly. Jenkins requires Java to run.
+- **Network Issues:** Ensure that port 8080 is open and not being blocked by firewall rules or other network settings.
+
+### **Additional Tips**
+
+- **Consider Security:** For production environments, configure Jenkins securely by setting up HTTPS and using strong authentication methods.
+- **Use Docker (Optional):** For more advanced setups, consider using Docker to run Jenkins, especially if you want to avoid configuration conflicts or require isolated environments.
+
+By following these steps, you should have Jenkins installed and running on your WSL 2 Ubuntu environment, ready for your CI/CD needs.
