@@ -629,3 +629,138 @@ If you encounter issues:
 - **Environment Variables:** Ensure no conflicting environment variables are set that might affect AWS CLI behavior.
 
 By following these steps, you should have the AWS CLI installed and configured on your WSL 2 Ubuntu environment. You can now use it to manage AWS resources from the command line.
+
+## Install Maven on Ubuntu WSL2
+
+To install Apache Maven on Ubuntu running within WSL 2 (Windows Subsystem for Linux 2), follow these steps:
+
+### **1. Update Your Package List**
+
+Start by updating your package list to ensure you have the latest information about available packages:
+
+```bash
+sudo apt update
+```
+
+### **2. Install Maven**
+
+Apache Maven is available in the default Ubuntu repositories, but the version may not always be the latest. To install it from the Ubuntu repository:
+
+```bash
+sudo apt install -y maven
+```
+
+### **3. Verify the Installation**
+
+Check that Maven is installed correctly and verify its version:
+
+```bash
+mvn -v
+```
+
+You should see output with the Maven version, along with details about the Java version used.
+
+### **4. Manual Installation (Optional)**
+
+If you need a specific version of Maven or prefer to install it manually, follow these steps:
+
+1. **Download the Maven Binary Archive:**
+
+   Go to the [Apache Maven download page](https://maven.apache.org/download.cgi) and find the latest version. Use `wget` or `curl` to download it. For example:
+
+   ```bash
+   curl -LO "https://downloads.apache.org/maven/maven-3/3.9.1/binaries/apache-maven-3.9.1-bin.tar.gz"
+   ```
+
+   Replace the URL with the latest version if needed.
+
+2. **Extract the Archive:**
+
+   ```bash
+   tar -xzf apache-maven-3.9.1-bin.tar.gz
+   ```
+
+3. **Move Maven to `/usr/local` (or another preferred directory):**
+
+   ```bash
+   sudo mv apache-maven-3.9.1 /usr/local/apache-maven
+   ```
+
+4. **Configure Environment Variables:**
+
+   Add Maven to your `PATH` by creating or modifying the `/etc/profile.d/maven.sh` file:
+
+   ```bash
+   sudo nano /etc/profile.d/maven.sh
+   ```
+
+   Add the following content:
+
+   ```bash
+   export MAVEN_HOME=/usr/local/apache-maven
+   export PATH=$MAVEN_HOME/bin:$PATH
+   ```
+
+   Save and exit the editor (`Ctrl+X`, `Y`, `Enter` for nano).
+
+5. **Apply the Changes:**
+
+   Load the new environment variables:
+
+   ```bash
+   source /etc/profile.d/maven.sh
+   ```
+
+6. **Verify the Installation:**
+
+   Check the Maven version to confirm it is correctly installed:
+
+   ```bash
+   mvn -v
+   ```
+
+### **5. Basic Maven Commands**
+
+Here are some basic Maven commands to get you started:
+
+- **Create a New Maven Project:**
+
+  ```bash
+  mvn archetype:generate -DgroupId=com.example -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+  ```
+
+- **Compile the Project:**
+
+  Navigate to your project directory and run:
+
+  ```bash
+  mvn compile
+  ```
+
+- **Package the Project:**
+
+  ```bash
+  mvn package
+  ```
+
+- **Run Tests:**
+
+  ```bash
+  mvn test
+  ```
+
+- **Install the Project to Local Repository:**
+
+  ```bash
+  mvn install
+  ```
+
+### **Troubleshooting**
+
+If you encounter issues:
+
+- **Check Java Installation:** Maven requires Java. Ensure you have JDK installed and configured. You can check your Java version with `java -version` and `javac -version`.
+- **Path Issues:** Ensure that Maven’s `bin` directory is correctly added to your `PATH`.
+- **Permissions:** Ensure you have the necessary permissions for directory access and file operations.
+
+By following these steps, you should have Apache Maven installed and configured on your WSL 2 Ubuntu environment. Maven will help you manage your Java projects and their dependencies effectively.
