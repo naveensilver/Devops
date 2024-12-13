@@ -1,0 +1,198 @@
+Here is a comprehensive list of common **Terraform commands** used for managing infrastructure as code. Each command serves a different purpose during the lifecycle of Terraform operations:
+
+### 1. **`terraform init`**
+   - **Purpose**: Initializes the working directory containing Terraform configuration files. This command is the first step when working with a new Terraform configuration.
+   - **Usage**:
+     ```bash
+     terraform init
+     ```
+   - **What it does**:
+     - Downloads necessary provider plugins.
+     - Initializes the backend configuration (where Terraform's state is stored).
+     - Sets up the working environment.
+
+### 2. **`terraform validate`**
+   - **Purpose**: Validates the Terraform configuration files for syntax errors and checks if the configuration is internally consistent.
+   - **Usage**:
+     ```bash
+     terraform validate
+     ```
+   - **What it does**: It doesn't check if the configuration is valid in the context of your infrastructure, but it ensures the syntax and structure of the files are correct.
+
+### 3. **`terraform plan`**
+   - **Purpose**: Creates an execution plan by comparing your current infrastructure state with the configuration in your `.tf` files.
+   - **Usage**:
+     ```bash
+     terraform plan
+     ```
+   - **What it does**: 
+     - Shows what changes Terraform will make (create, update, or destroy resources).
+     - It doesn’t apply any changes; it only previews them.
+   - **Optional**: You can specify a `-out` option to save the plan for later application:
+     ```bash
+     terraform plan -out=tfplan
+     ```
+
+### 4. **`terraform apply`**
+   - **Purpose**: Applies the changes required to reach the desired state of the configuration.
+   - **Usage**:
+     ```bash
+     terraform apply
+     ```
+   - **What it does**: 
+     - Executes the changes to your infrastructure as defined by the `terraform plan` or directly from the configuration files.
+     - After running `terraform plan`, you can apply the plan:
+       ```bash
+       terraform apply tfplan
+       ```
+   - **Interactive Prompt**: By default, Terraform will ask for confirmation before applying the changes.
+
+### 5. **`terraform show`**
+   - **Purpose**: Displays the current state or a plan in human-readable format.
+   - **Usage**:
+     ```bash
+     terraform show
+     ```
+   - **What it does**: Outputs the current state or a plan that was generated previously. It helps you review the resources and values in the state file.
+
+### 6. **`terraform state`**
+   - **Purpose**: Provides advanced commands to interact with Terraform's state file.
+   - **Usage**:
+     ```bash
+     terraform state list
+     terraform state show <resource>
+     ```
+   - **Common subcommands**:
+     - `list`: Lists all the resources in the current state.
+     - `show <resource>`: Displays the details of a specific resource from the state.
+     - `mv`: Moves resources from one state to another (useful in refactoring).
+     - `rm`: Removes a resource from the state.
+
+### 7. **`terraform import`**
+   - **Purpose**: Imports existing infrastructure into Terraform's state so it can be managed by Terraform.
+   - **Usage**:
+     ```bash
+     terraform import aws_instance.example i-1234567890abcdef0
+     ```
+   - **What it does**: Allows you to bring resources that were manually created or managed outside of Terraform into Terraform's state.
+
+### 8. **`terraform destroy`**
+   - **Purpose**: Destroys all resources defined in your Terraform configuration files.
+   - **Usage**:
+     ```bash
+     terraform destroy
+     ```
+   - **What it does**: Destroys the infrastructure managed by Terraform and removes it from the state.
+
+### 9. **`terraform output`**
+   - **Purpose**: Displays the values of output variables from the Terraform state.
+   - **Usage**:
+     ```bash
+     terraform output
+     ```
+   - **What it does**: Displays the output values, which are often used to get information about created resources (e.g., instance IP address, URLs, etc.).
+
+### 10. **`terraform fmt`**
+   - **Purpose**: Automatically formats Terraform configuration files (`.tf` files) according to the standard Terraform style.
+   - **Usage**:
+     ```bash
+     terraform fmt
+     ```
+   - **What it does**: Cleans up the formatting of the `.tf` files, ensuring consistency and readability.
+
+### 11. **`terraform providers`**
+   - **Purpose**: Lists the providers used in the configuration, including the provider plugins.
+   - **Usage**:
+     ```bash
+     terraform providers
+     ```
+   - **What it does**: Displays all the provider configurations that are required by the configuration files.
+
+### 12. **`terraform taint`**
+   - **Purpose**: Manually marks a resource as "tainted," causing Terraform to destroy and recreate it on the next `apply`.
+   - **Usage**:
+     ```bash
+     terraform taint <resource_type>.<resource_name>
+     ```
+   - **What it does**: Forces the resource to be destroyed and recreated during the next `terraform apply` (useful for forcing a resource to be recreated if it is malfunctioning).
+
+### 13. **`terraform untaint`**
+   - **Purpose**: Removes the "tainted" status from a resource.
+   - **Usage**:
+     ```bash
+     terraform untaint <resource_type>.<resource_name>
+     ```
+   - **What it does**: Reverts the effect of `terraform taint` and prevents a resource from being destroyed and recreated.
+
+### 14. **`terraform version`**
+   - **Purpose**: Displays the Terraform version you are currently using.
+   - **Usage**:
+     ```bash
+     terraform version
+     ```
+   - **What it does**: Prints the installed Terraform version, and the versions of providers used in the configuration.
+
+### 15. **`terraform providers lock`**
+   - **Purpose**: Locks the provider versions for the configuration. This command is particularly useful when you want to ensure consistent versions are used for each run.
+   - **Usage**:
+     ```bash
+     terraform providers lock
+     ```
+
+### 16. **`terraform console`**
+   - **Purpose**: Opens an interactive console for evaluating Terraform expressions.
+   - **Usage**:
+     ```bash
+     terraform console
+     ```
+   - **What it does**: Allows you to interactively evaluate expressions and data sources in your Terraform configuration, similar to a REPL.
+
+### 17. **`terraform workspace`**
+   - **Purpose**: Manages workspaces in Terraform. Workspaces allow you to manage multiple environments (e.g., dev, staging, production) with the same configuration.
+   - **Usage**:
+     ```bash
+     terraform workspace list
+     terraform workspace new <workspace_name>
+     terraform workspace select <workspace_name>
+     ```
+   - **What it does**: 
+     - `list`: Lists all workspaces.
+     - `new`: Creates a new workspace.
+     - `select`: Selects an existing workspace to work with.
+
+---
+
+### Terraform Command Flow Example:
+
+1. **Initialize your working directory**:
+   ```bash
+   terraform init
+   ```
+
+2. **Validate the configuration**:
+   ```bash
+   terraform validate
+   ```
+
+3. **Create an execution plan**:
+   ```bash
+   terraform plan
+   ```
+
+4. **Apply the plan to create resources**:
+   ```bash
+   terraform apply
+   ```
+
+5. **Check output values**:
+   ```bash
+   terraform output
+   ```
+
+6. **Destroy the resources**:
+   ```bash
+   terraform destroy
+   ```
+
+### Summary:
+These are the core commands you’ll need while working with Terraform to manage your infrastructure. Most workflows follow the sequence of `terraform init`, `terraform plan`, and `terraform apply`, but you’ll also rely on the other commands (like `terraform destroy`, `terraform validate`, etc.) to manage and inspect your infrastructure.
