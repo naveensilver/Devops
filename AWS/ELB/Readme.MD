@@ -40,3 +40,65 @@ If you're running a **web application** with several EC2 instances, you can use 
 - If an EC2 instance becomes unhealthy, ELB will stop sending traffic to it and route it to another healthy instance.
 
 In conclusion, **ELB (Elastic Load Balancing)** helps optimize the availability, scalability, and performance of your applications by efficiently distributing traffic across resources in AWS. It ensures your system can handle fluctuating loads and provides high availability in the event of instance failures.
+
+---
+
+In AWS, there are three main types of load balancers, each designed for specific use cases. They are:
+
+1. **Classic Load Balancer (CLB)**
+2. **Application Load Balancer (ALB)**
+3. **Network Load Balancer (NLB)**
+
+Here’s a simple breakdown of each, along with the differences between them:
+
+### 1. **Classic Load Balancer (CLB)**
+- **Use case**: Primarily used for simple applications that require basic load balancing.
+- **Layer**: Operates at **Layer 4 (TCP)** and **Layer 7 (HTTP/HTTPS)** of the OSI model.
+- **Routing**: Routes traffic based on IP address and port (Layer 4), and can also handle HTTP/HTTPS traffic (Layer 7).
+- **Features**: 
+   - Basic load balancing for EC2 instances.
+   - Limited support for routing HTTP(S) traffic (no advanced routing capabilities like path-based or host-based routing).
+   - Not as flexible as ALB and NLB.
+
+### 2. **Application Load Balancer (ALB)**
+- **Use case**: Ideal for modern, scalable web applications and microservices.
+- **Layer**: Operates at **Layer 7 (HTTP/HTTPS)** of the OSI model.
+- **Routing**: Routes traffic based on **content** such as URL paths, query strings, HTTP headers, and cookies.
+- **Features**: 
+   - Advanced HTTP(S) routing with support for host-based and path-based routing.
+   - Supports WebSocket and HTTP/2.
+   - Ideal for microservices and containerized applications (e.g., ECS and EKS).
+   - Provides enhanced security features like SSL termination and authentication.
+
+### 3. **Network Load Balancer (NLB)**
+- **Use case**: Best for applications that require ultra-low latency, high performance, or need to handle millions of requests per second.
+- **Layer**: Operates at **Layer 4 (TCP/UDP)** of the OSI model.
+- **Routing**: Routes traffic based on **IP protocol** (TCP/UDP).
+- **Features**:
+   - Capable of handling large amounts of traffic and provides very low latency.
+   - Supports static IP addresses and Elastic IP (EIP) for stable and predictable IP routing.
+   - Ideal for high-performance applications like gaming, IoT, or real-time data processing.
+   - Can handle both TCP and UDP traffic, making it suitable for protocols other than HTTP/S.
+
+### **Key Differences**:
+
+| Feature                           | **Classic Load Balancer (CLB)**    | **Application Load Balancer (ALB)**    | **Network Load Balancer (NLB)**    |
+|------------------------------------|------------------------------------|----------------------------------------|------------------------------------|
+| **Layer of Operation**            | Layer 4 (TCP) & Layer 7 (HTTP)     | Layer 7 (HTTP/HTTPS)                   | Layer 4 (TCP/UDP)                  |
+| **Routing Method**                | IP address and port                | Based on content (path, host, headers) | Based on IP address and port      |
+| **Best for**                       | Simple applications                | Microservices, containers, and web apps| High-performance, low-latency apps |
+| **Supports WebSocket**            | No                                 | Yes                                    | No                                 |
+| **Supports HTTP/2**               | No                                 | Yes                                    | No                                 |
+| **SSL Termination**               | Yes (basic)                        | Yes (advanced)                         | No                                 |
+| **Performance**                   | Moderate                           | High                                   | Very high (low latency)            |
+| **Ideal for**                     | Legacy applications                | Dynamic, content-based routing         | High throughput and low latency apps |
+
+### **When to Use Which Load Balancer**:
+- **CLB**: Best for **legacy applications** or simple use cases where advanced routing features are not necessary.
+- **ALB**: Best for **modern web applications** and **microservices**, especially when advanced routing, security, and SSL termination are needed.
+- **NLB**: Best for **high-performance applications**, requiring **low latency** and the ability to handle millions of requests per second.
+
+In summary, choose a load balancer based on your specific needs:
+- Use **CLB** for simple, basic applications.
+- Use **ALB** for web apps, microservices, or applications requiring advanced HTTP routing.
+- Use **NLB** for low-latency, high-performance applications.
