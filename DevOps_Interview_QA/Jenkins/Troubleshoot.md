@@ -1,5 +1,3 @@
----
-
 ### **Situation:**
 We were using Jenkins agents on virtual machines (VMs) to run our build and deployment tasks. However, we faced some problems: the VMs took a long time to start, used a lot of resources, and managing them became difficult as the project grew. This slowed down our build process and made it hard to scale.
 
